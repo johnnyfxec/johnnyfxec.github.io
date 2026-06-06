@@ -93,21 +93,46 @@ input[type="file"]{display:none;}
 .firma-espacio{height:50px;}
 .doc-pie{text-align:center;font-size:8pt;color:#888;margin-top:20px;padding-top:8px;border-top:1px solid #EEE;}
 @media print{
-  @page{size:A4 portrait;margin:0;}
-  body{background:white;}
+  @page{size:A4 portrait;margin:10mm 12mm 10mm 14mm;}
+  body{background:white;font-size:9pt;}
   #toolbar{display:none!important;}
   .pagina{
     margin:0;
     box-shadow:none;
-    padding:14mm 18mm 14mm 20mm;
-    width:210mm;
-    min-height:297mm;
+    padding:0;
+    width:100%;
+    min-height:unset;
+    height:auto;
     page-break-after:always;
     break-after:page;
+    overflow:visible;
   }
   .pagina:last-child{page-break-after:avoid;break-after:avoid;}
-  .ev-upload-btn,.ev-upload-hint,.wa-upload-btn{display:none!important;}
+  .ev-upload-btn,.ev-upload-hint,.wa-upload-btn,.inner{display:none!important;}
   .ev-card-body img,.wa-card-body img{display:block!important;}
+  .ev-card-body::before,.wa-card-body::before{padding-top:120%;}
+  table.dt{font-size:7pt;width:100%;}
+  table.dt thead th,table.dt tbody td,table.dt tfoot td{padding:2px 4px;line-height:1.2;}
+  .datos-table td{padding:2px 5px;font-size:8pt;}
+  .nota{font-size:7.5pt;padding:4px 8px;margin:4px 0;}
+  .legal-box{font-size:8pt;padding:6px 10px;margin:4px 0;}
+  p{font-size:8.5pt;margin-bottom:4px;line-height:1.4;}
+  .seccion-titulo{font-size:9pt;margin:8px 0 4px;}
+  .sub-titulo{font-size:8.5pt;margin:6px 0 3px;}
+  .peticion-lista li{font-size:8.5pt;padding:3px 0 3px 22px;line-height:1.4;}
+  .saldo-row{padding:6px 10px;}
+  .saldo-neg .amount,.saldo-pos .amount{font-size:11pt;}
+  .doc-main-title{font-size:11pt;}
+  .doc-institution{font-size:8.5pt;}
+  .page-header{font-size:7pt;}
+  .ev-card-footer,.wa-card-footer{font-size:7pt;padding:3px 8px;}
+  .ef-label,.rel-label{font-size:6.5pt;}
+  .ev-card-header,.wa-card-header{font-size:7.5pt;padding:4px 8px;}
+  .firma-espacio{height:30px;}
+  .firma-grid{margin-top:20px;gap:20px;}
+  .firma-box .linea{font-size:8pt;}
+  .doc-pie{font-size:7pt;margin-top:10px;}
+  .ev-grid{gap:8px;}
 }
 </style>
 </head>

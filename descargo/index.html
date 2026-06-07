@@ -138,6 +138,7 @@ input[type="file"]{display:none;}
 </head>
 <body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<div id="contenido">
 <div id="toolbar">
   <span style="font-size:10pt;opacity:0.7;">Juicio No. 09U02-2026-00417 &nbsp;|&nbsp; Johnny Alonso Bravo Loor</span>
   <button id="btn-pdf" onclick="generarPDF()">⬇ DESCARGAR PDF</button>
@@ -147,18 +148,41 @@ function generarPDF(){
   const btn = document.getElementById('btn-pdf');
   btn.textContent = 'Generando...';
   btn.disabled = true;
-  const paginas = document.querySelectorAll('.pagina');
+  document.getElementById('toolbar').style.display = 'none';
+  document.body.style.background = 'white';
+  const el = document.getElementById('contenido');
   const opt = {
     margin: 0,
     filename: 'Descargo_Juicio_09U02-2026-00417.pdf',
     image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+    html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
     jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-    pagebreak: { mode: ['css','legacy'], before: '.pagina' }
+    pagebreak: { mode: 'avoid-all', before: '.pagina' }
   };
-  html2pdf().set(opt).from(document.body).save().then(function(){
+  html2pdf().set(opt).from(el).save().then(function(){
+    document.getElementById('toolbar').style.display = 'flex';
+    document.body.style.background = '#E8E8E8';
     btn.textContent = '⬇ DESCARGAR PDF';
     btn.disabled = false;
+  });
+}
+
+// ===== PERSISTENCIA DE IMÁGENES EN LOCALSTORAGE =====
+function saveImage(id, dataUrl){
+  try { localStorage.setItem('img_'+id, dataUrl); } catch(e){}
+}
+function loadSavedImages(){
+  const ids = [];
+  comprobantes.forEach(c => ids.push('ev-'+c.num));
+  whatsapps.forEach(w => ids.push('wa-'+w.num));
+  ids.forEach(function(id){
+    const saved = localStorage.getItem('img_'+id);
+    if(saved){
+      const img = document.getElementById('img-'+id);
+      const inner = document.getElementById('inner-'+id);
+      if(img){ img.src = saved; img.classList.add('loaded'); }
+      if(inner){ inner.style.display = 'none'; }
+    }
   });
 }
 </script>
@@ -408,6 +432,7 @@ function generarPDF(){
   <div class="seccion-titulo">VII. Evidencia de Comunicaciones – Solicitudes de Pago Directo (5)</div>
   <div class="ev-grid single" id="grid-wa-5"></div>
 </div>
+</div>
 <script>
 const comprobantes = [
   {num:1,title:"Comprobante",date:"20/04/2023 – $300.00",remitente:"Agencia Bco. Guayaquil (ventanilla)",fecha:"20/04/2023",monto:"$300.00",ref:"Ref. 8631 – 150 pensión + 150 ropa"},
@@ -479,6 +504,7 @@ function loadImage(id,input){
     img.src=e.target.result;
     img.classList.add('loaded');
     inner.style.display='none';
+    saveImage(id,e.target.result);
   };
   reader.readAsDataURL(input.files[0]);
 }
@@ -488,6 +514,7 @@ document.getElementById('grid-ev-13-14').innerHTML=comprobantes.slice(12,14).map
 document.getElementById('grid-wa-1-2').innerHTML=whatsapps.slice(0,2).map(makeWaCard).join('');
 document.getElementById('grid-wa-3-4').innerHTML=whatsapps.slice(2,4).map(makeWaCard).join('');
 document.getElementById('grid-wa-5').innerHTML=whatsapps.slice(4,5).map(makeWaCard).join('');
+loadSavedImages();
 </script>
 </body>
 </html>

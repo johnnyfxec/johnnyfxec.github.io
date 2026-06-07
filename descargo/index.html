@@ -5,106 +5,91 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Descargo – Juicio 09U02-2026-00417</title>
 <style>
-:root {
-  --negro: #0A0A0A;
-  --gris-oscuro: #1A1A1A;
-  --gris-medio: #2D2D2D;
-  --gris-borde: #CCCCCC;
-  --gris-fondo: #F4F4F4;
-  --amarillo-nota: #FFF8E1;
-  --amarillo-borde: #F0C040;
-  --verde-ok: #155724;
-  --verde-fondo: #D4EDDA;
-  --rojo-alerta: #721C24;
-  --rojo-fondo: #FFF3CD;
-  --verde-wa: #25D366;
-  --verde-wa-fondo: #E8F7ED;
+:root{
+  --negro:#0A0A0A;--gris-oscuro:#1A1A1A;--gris-medio:#2D2D2D;
+  --gris-borde:#CCCCCC;--gris-fondo:#F4F4F4;
+  --amarillo-nota:#FFF8E1;--amarillo-borde:#F0C040;
+  --verde-ok:#155724;--verde-fondo:#D4EDDA;
+  --rojo-alerta:#721C24;--rojo-fondo:#FFF3CD;
+  --verde-wa:#25D366;--verde-wa-fondo:#E8F7ED;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:Arial,sans-serif;font-size:11pt;color:var(--gris-oscuro);background:#E8E8E8;}
 #toolbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--negro);color:white;display:flex;align-items:center;justify-content:space-between;padding:10px 24px;box-shadow:0 2px 8px rgba(0,0,0,0.4);}
 #toolbar button{background:white;color:var(--negro);border:none;padding:8px 22px;font-size:10pt;font-weight:bold;cursor:pointer;}
-.pagina{width:210mm;height:297mm;margin:70px auto 16px;background:white;padding:14mm 16mm 14mm 18mm;box-shadow:0 2px 12px rgba(0,0,0,0.15);overflow:hidden;}
-.page-header{border-bottom:1.5px solid var(--gris-oscuro);padding-bottom:5px;margin-bottom:12px;font-size:8.5pt;color:#555;display:flex;justify-content:space-between;}
-.doc-title-block{text-align:center;margin-bottom:14px;}
-.doc-institution{font-size:9.5pt;font-weight:bold;text-transform:uppercase;line-height:1.5;}
-.doc-main-title{font-size:14pt;font-weight:bold;text-transform:uppercase;letter-spacing:1px;margin:10px 0;border-top:1px solid #CCC;border-bottom:1px solid #CCC;padding:6px 0;}
-.datos-table{width:100%;border-collapse:collapse;margin-bottom:14px;font-size:9.5pt;}
-.datos-table td{padding:4px 8px;border:1px solid var(--gris-borde);vertical-align:top;}
+.pagina{width:210mm;height:297mm;margin:70px auto 16px;background:white;padding:12mm 16mm 12mm 18mm;box-shadow:0 2px 12px rgba(0,0,0,0.15);overflow:hidden;}
+.page-header{border-bottom:1.5px solid var(--gris-oscuro);padding-bottom:4px;margin-bottom:10px;font-size:8pt;color:#555;display:flex;justify-content:space-between;}
+.doc-title-block{text-align:center;margin-bottom:10px;}
+.doc-institution{font-size:9pt;font-weight:bold;text-transform:uppercase;line-height:1.4;}
+.doc-main-title{font-size:13pt;font-weight:bold;text-transform:uppercase;letter-spacing:1px;margin:8px 0;border-top:1px solid #CCC;border-bottom:1px solid #CCC;padding:5px 0;}
+.datos-table{width:100%;border-collapse:collapse;margin-bottom:10px;font-size:8.5pt;}
+.datos-table td{padding:3px 7px;border:1px solid var(--gris-borde);vertical-align:top;}
 .datos-table td:first-child{font-weight:bold;background:var(--gris-fondo);width:40%;}
-.seccion-titulo{font-size:10.5pt;font-weight:bold;text-transform:uppercase;letter-spacing:0.5px;border-bottom:2px solid var(--gris-oscuro);padding-bottom:3px;margin:16px 0 8px;}
-.sub-titulo{font-size:10pt;font-weight:bold;margin:10px 0 5px;color:#333;}
-p{text-align:justify;line-height:1.6;margin-bottom:8px;font-size:10pt;}
-table.dt{width:100%;border-collapse:collapse;font-size:8.5pt;margin-bottom:8px;}
+.seccion-titulo{font-size:9.5pt;font-weight:bold;text-transform:uppercase;letter-spacing:0.5px;border-bottom:2px solid var(--gris-oscuro);padding-bottom:2px;margin:10px 0 6px;}
+.sub-titulo{font-size:9pt;font-weight:bold;margin:8px 0 4px;color:#333;}
+p{text-align:justify;line-height:1.5;margin-bottom:6px;font-size:9pt;}
+table.dt{width:100%;border-collapse:collapse;font-size:7.5pt;margin-bottom:6px;}
 table.dt thead tr{background:var(--gris-oscuro);color:white;}
-table.dt thead th{padding:5px 6px;text-align:center;font-weight:bold;}
+table.dt thead th{padding:4px 5px;text-align:center;font-weight:bold;}
 table.dt thead th.left{text-align:left;}
 table.dt tbody tr:nth-child(even){background:var(--gris-fondo);}
 table.dt tbody tr:nth-child(odd){background:white;}
-table.dt tbody td{padding:4px 6px;border-bottom:1px solid #E0E0E0;text-align:center;vertical-align:middle;}
+table.dt tbody td{padding:3px 5px;border-bottom:1px solid #E0E0E0;text-align:center;vertical-align:middle;}
 table.dt tbody td.left{text-align:left;}
 table.dt tfoot tr{background:var(--gris-medio);color:white;}
 table.dt tfoot tr.sub{background:#444;}
-table.dt tfoot td{padding:5px 6px;font-weight:bold;font-size:9pt;}
+table.dt tfoot td{padding:4px 5px;font-weight:bold;font-size:8pt;}
 table.dt tfoot td.right{text-align:right;}
 table.dt tfoot td.left{text-align:left;}
-.nota{background:var(--amarillo-nota);border-left:4px solid var(--amarillo-borde);padding:8px 12px;font-size:9pt;margin:8px 0;line-height:1.5;}
-.legal-box{background:#F7F7F7;border-left:4px solid var(--gris-oscuro);padding:10px 14px;margin:8px 0;font-size:9.5pt;line-height:1.6;}
-.legal-box .pregunta{font-weight:bold;margin-bottom:4px;}
-.saldo-row{display:flex;justify-content:space-between;align-items:center;padding:9px 14px;margin:6px 0;border:1.5px solid;}
+.nota{background:var(--amarillo-nota);border-left:4px solid var(--amarillo-borde);padding:6px 10px;font-size:8pt;margin:6px 0;line-height:1.4;}
+.legal-box{background:#F7F7F7;border-left:4px solid var(--gris-oscuro);padding:7px 12px;margin:6px 0;font-size:8.5pt;line-height:1.5;}
+.legal-box .pregunta{font-weight:bold;margin-bottom:3px;}
+.saldo-row{display:flex;justify-content:space-between;align-items:center;padding:7px 12px;margin:5px 0;border:1.5px solid;}
 .saldo-neg{background:var(--rojo-fondo);border-color:#F0C040;}
-.saldo-neg .label{font-weight:bold;color:#856404;font-size:10pt;}
-.saldo-neg .amount{font-weight:bold;color:var(--rojo-alerta);font-size:13pt;}
+.saldo-neg .label{font-weight:bold;color:#856404;font-size:9pt;}
+.saldo-neg .amount{font-weight:bold;color:var(--rojo-alerta);font-size:12pt;}
 .saldo-pos{background:var(--verde-fondo);border-color:#28A745;}
-.saldo-pos .label{font-weight:bold;color:var(--verde-ok);font-size:10pt;}
-.saldo-pos .amount{font-weight:bold;color:var(--verde-ok);font-size:13pt;}
-.ev-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0;}
+.saldo-pos .label{font-weight:bold;color:var(--verde-ok);font-size:9pt;}
+.saldo-pos .amount{font-weight:bold;color:var(--verde-ok);font-size:12pt;}
+.ev-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:6px 0;}
 .ev-grid.single{grid-template-columns:1fr;}
 .ev-card{border:1.5px dashed #999;overflow:hidden;}
-.ev-card-header{background:var(--gris-medio);color:white;padding:6px 10px;font-size:8.5pt;font-weight:bold;display:flex;justify-content:space-between;align-items:center;}
-.ev-card-header .ev-num{background:white;color:var(--gris-oscuro);border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-weight:bold;font-size:7.5pt;margin-right:6px;flex-shrink:0;}
+.ev-card-header{background:var(--gris-medio);color:white;padding:4px 8px;font-size:7.5pt;font-weight:bold;display:flex;justify-content:space-between;align-items:center;}
+.ev-card-header .ev-num{background:white;color:var(--gris-oscuro);border-radius:50%;width:16px;height:16px;display:inline-flex;align-items:center;justify-content:center;font-weight:bold;font-size:7pt;margin-right:5px;flex-shrink:0;}
 .ev-card-body{position:relative;background:#FAFAFA;border-bottom:1px solid #DDD;}
-.ev-card-body::before{content:'';display:block;padding-top:133%;}
-.ev-card-body .inner{position:absolute;top:0;left:0;right:0;bottom:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;}
+.ev-card-body::before{content:'';display:block;padding-top:85%;}
+.ev-card-body .inner{position:absolute;top:0;left:0;right:0;bottom:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;}
 .ev-card-body img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;display:none;}
 .ev-card-body img.loaded{display:block;}
-.ev-upload-btn{background:var(--gris-oscuro);color:white;border:none;padding:7px 16px;cursor:pointer;font-size:8.5pt;font-weight:bold;z-index:1;}
-.ev-upload-hint{font-size:8pt;color:#AAA;font-style:italic;z-index:1;}
-.ev-card-footer{background:#F0F0F0;padding:5px 10px;font-size:8pt;color:#444;}
-.ev-card-footer span{display:block;line-height:1.5;}
-.ef-label{font-weight:bold;color:#333;text-transform:uppercase;font-size:7pt;}
+.ev-upload-btn{background:var(--gris-oscuro);color:white;border:none;padding:5px 12px;cursor:pointer;font-size:7.5pt;font-weight:bold;z-index:1;}
+.ev-upload-hint{font-size:7pt;color:#AAA;font-style:italic;z-index:1;}
+.ev-card-footer{background:#F0F0F0;padding:4px 8px;font-size:7pt;color:#444;}
+.ev-card-footer span{display:block;line-height:1.4;}
+.ef-label{font-weight:bold;color:#333;text-transform:uppercase;font-size:6.5pt;}
 input[type="file"]{display:none;}
 .wa-card{border:1.5px dashed var(--verde-wa);overflow:hidden;}
-.wa-card-header{background:var(--verde-wa);color:white;padding:6px 10px;font-size:8.5pt;font-weight:bold;}
+.wa-card-header{background:var(--verde-wa);color:white;padding:5px 10px;font-size:8pt;font-weight:bold;}
 .wa-card-body{position:relative;background:#FAFAFA;border-bottom:1px solid #DDD;}
-.wa-card-body::before{content:'';display:block;padding-top:133%;}
-.wa-card-body .inner{position:absolute;top:0;left:0;right:0;bottom:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;}
+.wa-card-body::before{content:'';display:block;padding-top:177%;}
+.wa-card-body .inner{position:absolute;top:0;left:0;right:0;bottom:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;}
 .wa-card-body img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;display:none;}
 .wa-card-body img.loaded{display:block;}
-.wa-upload-btn{background:var(--verde-wa);color:white;border:none;padding:7px 16px;cursor:pointer;font-size:8.5pt;font-weight:bold;z-index:1;}
-.wa-card-footer{background:var(--verde-wa-fondo);padding:5px 10px;font-size:8pt;color:#333;border-top:1px solid #B2DFDB;}
-.rel-label{font-weight:bold;color:#1A6B36;text-transform:uppercase;font-size:7pt;display:block;}
+.wa-upload-btn{background:var(--verde-wa);color:white;border:none;padding:5px 12px;cursor:pointer;font-size:7.5pt;font-weight:bold;z-index:1;}
+.wa-card-footer{background:var(--verde-wa-fondo);padding:4px 10px;font-size:7.5pt;color:#333;border-top:1px solid #B2DFDB;}
+.rel-label{font-weight:bold;color:#1A6B36;text-transform:uppercase;font-size:6.5pt;display:block;}
 .peticion-lista{padding-left:0;list-style:none;counter-reset:pet;}
-.peticion-lista li{counter-increment:pet;padding:6px 0 6px 26px;position:relative;border-bottom:1px solid #EEE;font-size:10pt;line-height:1.55;text-align:justify;}
+.peticion-lista li{counter-increment:pet;padding:4px 0 4px 24px;position:relative;border-bottom:1px solid #EEE;font-size:8.5pt;line-height:1.4;text-align:justify;}
 .peticion-lista li::before{content:counter(pet) ".";position:absolute;left:0;font-weight:bold;}
-.firma-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:40px;}
+.firma-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:24px;}
 .firma-box{text-align:center;}
-.firma-box .linea{border-top:1.5px solid var(--gris-oscuro);padding-top:8px;font-size:9pt;}
-.firma-espacio{height:50px;}
-.doc-pie{text-align:center;font-size:8pt;color:#888;margin-top:20px;padding-top:8px;border-top:1px solid #EEE;}
+.firma-box .linea{border-top:1.5px solid var(--gris-oscuro);padding-top:6px;font-size:8.5pt;}
+.firma-espacio{height:36px;}
+.doc-pie{text-align:center;font-size:7.5pt;color:#888;margin-top:12px;padding-top:6px;border-top:1px solid #EEE;}
 @media print{
-  @page{size:A4 portrait;margin:14mm 16mm 14mm 18mm;}
-  body{background:white!important;}
+  @page{size:A4 portrait;margin:0;}
+  body{background:white;}
   #toolbar{display:none!important;}
-  .pagina{
-    width:100%;
-    margin:0!important;
-    padding:0!important;
-    box-shadow:none!important;
-    background:white!important;
-    page-break-after:always;
-    break-after:page;
-  }
+  .pagina{margin:0;box-shadow:none;padding:10mm 14mm 10mm 16mm;page-break-after:always;break-after:page;width:210mm;height:297mm;}
   .pagina:last-child{page-break-after:avoid;break-after:avoid;}
   .ev-upload-btn,.ev-upload-hint,.wa-upload-btn{display:none!important;}
   .ev-card-body img.loaded,.wa-card-body img.loaded{display:block!important;}
@@ -113,35 +98,12 @@ input[type="file"]{display:none;}
 </style>
 </head>
 <body>
-<div id="contenido">
 <div id="toolbar">
   <span style="font-size:10pt;opacity:0.7;">Juicio No. 09U02-2026-00417 &nbsp;|&nbsp; Johnny Alonso Bravo Loor</span>
-  <button id="btn-pdf" onclick="window.print()">🖨 IMPRIMIR / GUARDAR PDF</button>
+  <button onclick="window.print()">🖨 IMPRIMIR / GUARDAR PDF</button>
 </div>
-<script>
 
-// ===== PERSISTENCIA
-
-// ===== PERSISTENCIA DE IMÁGENES EN LOCALSTORAGE =====
-function saveImage(id, dataUrl){
-  try { localStorage.setItem('img_'+id, dataUrl); } catch(e){}
-}
-function loadSavedImages(){
-  const ids = [];
-  comprobantes.forEach(c => ids.push('ev-'+c.num));
-  whatsapps.forEach(w => ids.push('wa-'+w.num));
-  ids.forEach(function(id){
-    const saved = localStorage.getItem('img_'+id);
-    if(saved){
-      const img = document.getElementById('img-'+id);
-      const inner = document.getElementById('inner-'+id);
-      if(img){ img.src = saved; img.classList.add('loaded'); }
-      if(inner){ inner.style.display = 'none'; }
-    }
-  });
-}
-</script>
-
+<!-- PÁGINA 1: Encabezado + I + II inicio -->
 <div class="pagina">
   <div class="page-header">
     <span>Juicio No. 09U02-2026-00417 &nbsp;|&nbsp; Código SUPA: 0901-203105</span>
@@ -163,9 +125,9 @@ function loadSavedImages(){
   <div class="seccion-titulo">I. Antecedentes</div>
   <p>El suscrito, <strong>Johnny Alonso Bravo Loor</strong>, en calidad de alimentante principal, comparezco ante su autoridad en relación al juicio de ejecución No. <strong>09U02-2026-00417</strong>, iniciado por <strong>Lucy Briseth Barrezueta Macías</strong>, para presentar el presente escrito de descargo con sustento documental completo.</p>
   <p>La obligación alimentaria fue establecida mediante Acta de Mediación y el primer registro en el SUPA data del <strong>08 de julio de 2022</strong>. Desde esa fecha, he cumplido de manera ininterrumpida a través de <strong>tres vías documentadas</strong>: (1) depósitos al SUPA, (2) pagos directos al establecimiento educativo de la menor, y (3) transferencias bancarias directas a la beneficiaria, esta última modalidad motivada por razones que se detallan en la Sección VII.</p>
-  <p>El sistema SUPA registra una deuda pendiente de <strong>$2,841.48</strong> correspondiente al período febrero 2025 – junio 2026. Sin embargo, los pagos efectuados en beneficio de mi hija <strong>Valentina Isabella Bravo Barrezueta</strong> exceden ampliamente dicho valor, conforme se demuestra con la documentación de respaldo adjunta.</p>
+  <p>El sistema SUPA registra una deuda pendiente de <strong>$2,841.48</strong> correspondiente al período febrero 2025 – junio 2026. Sin embargo, los pagos efectuados en beneficio de mi hija <strong>Valentina Isabella Bravo Barrezueta</strong> exceden ampliamente dicho valor, conforme se demuestra con la documentación adjunta.</p>
   <div class="seccion-titulo">II. Pagos Acreditados en el Sistema SUPA</div>
-  <p>Los siguientes valores han sido acreditados en el SUPA en el período julio 2022 – enero 2025:</p>
+  <p>Valores acreditados en el SUPA en el período julio 2022 – enero 2025:</p>
   <table class="dt">
     <thead><tr><th>Período</th><th class="left">Concepto</th><th>Pensión/Adicional</th><th>Interés</th><th>Estado</th></tr></thead>
     <tbody>
@@ -182,12 +144,9 @@ function loadSavedImages(){
       <tr><td>May 2023</td><td class="left">Pensión + Interés</td><td>$130.71</td><td>$38.40</td><td>✓</td></tr>
       <tr><td>Jun 2023</td><td class="left">Pensión + Interés</td><td>$130.71</td><td>$37.60</td><td>✓</td></tr>
     </tbody>
-    <tfoot>
-      <tr><td class="left" colspan="4">Continúa en página siguiente...</td><td class="right">→</td></tr>
-    </tfoot>
   </table>
 </div>
-
+<!-- PÁGINA 2: II continuación -->
 <div class="pagina">
   <div class="page-header">
     <span>Juicio No. 09U02-2026-00417 &nbsp;|&nbsp; Código SUPA: 0901-203105</span>
@@ -223,6 +182,7 @@ function loadSavedImages(){
   </table>
   <div class="nota"><strong>Nota:</strong> Entre el 27 de abril y el 12 de mayo de 2026 se realizaron 4 depósitos al SUPA por <strong>$4,603.79</strong> ($1,188.39 + $1,658.96 + $329.85 + $1,426.59), retirados por la beneficiaria y destinados al pago de deudas con el Colegio Thomas More para el inicio del año lectivo 2025–2026. No se duplican en este resumen.</div>
 </div>
+<!-- PÁGINA 3: III Colegio -->
 <div class="pagina">
   <div class="page-header">
     <span>Juicio No. 09U02-2026-00417 &nbsp;|&nbsp; Código SUPA: 0901-203105</span>
@@ -261,14 +221,14 @@ function loadSavedImages(){
   </table>
   <div class="nota"><strong>Nota:</strong> El pago de $798.00 del 09/05/2023 (ref. 49366257) fue realizado directamente por el alimentante al Thomas More e incluido en el historial del establecimiento. Los pagos 2021–2022 ($780.00) no se contabilizan por ser previos al período SUPA, pero evidencian el cumplimiento voluntario anterior.</div>
 </div>
-
+<!-- PÁGINA 4: IV Transferencias + V Resumen -->
 <div class="pagina">
   <div class="page-header">
     <span>Juicio No. 09U02-2026-00417 &nbsp;|&nbsp; Código SUPA: 0901-203105</span>
     <span>Alimentante: Johnny Alonso Bravo Loor</span>
   </div>
   <div class="seccion-titulo">IV. Transferencias Directas a la Beneficiaria – Fuera del Canal SUPA</div>
-  <p>Pagos realizados en beneficio directo de la menor y su madre, mediante transferencias desde cuentas propias y de terceros de confianza, ante el bloqueo de las cuentas del alimentante en Ecuador. Esta modalidad fue expresamente solicitada por la propia beneficiaria, conforme a las comunicaciones adjuntas en la Sección VII.</p>
+  <p>Pagos realizados en beneficio directo de la menor y su madre, mediante transferencias desde cuentas propias y de terceros de confianza, ante el bloqueo de las cuentas del alimentante en Ecuador. Modalidad expresamente solicitada por la propia beneficiaria, conforme a las comunicaciones adjuntas en la Sección VII.</p>
   <table class="dt">
     <thead><tr><th>#</th><th class="left">Remitente</th><th>Fecha</th><th>Monto</th><th class="left">Concepto</th><th>Ref.</th></tr></thead>
     <tbody>
@@ -291,8 +251,7 @@ function loadSavedImages(){
       <tr><td class="left" colspan="5">TOTAL TRANSFERENCIAS DIRECTAS A LA BENEFICIARIA</td><td class="right">$4,403.35</td></tr>
     </tfoot>
   </table>
-  <div class="nota"><strong>Nota:</strong> Todos los pagos tuvieron como receptor la cuenta de Lucy Briseth Barrezueta Macías (Bco. Guayaquil, Bolivariano o Produbanco). Los remitentes Aracely Maribel Loor Muñoz (C.I. 0914708441) y Ángel Remigio Miller Loor actuaron como prestadores de cuenta ante el bloqueo de las cuentas del alimentante en Ecuador.</div>
-</div>
+  <div class="nota"><strong>Nota:</strong> Todos los pagos tuvieron como receptor la cuenta de Lucy Briseth Barrezueta Macías (Bco. Guayaquil, Bolivariano o Produbanco). Los remitentes Aracely Maribel Loor Muñoz (C.I. 0914708441) y Ángel Remigio Miller Loor (C.I. 0917900789) actuaron como prestadores de cuenta ante el bloqueo de las cuentas del alimentante en Ecuador.</div>
   <div class="seccion-titulo">V. Resumen Global de Pagos en Beneficio de la Menor</div>
   <table class="dt">
     <thead><tr><th class="left">Fuente de Pago</th><th>Período</th><th>Total</th></tr></thead>
@@ -306,21 +265,17 @@ function loadSavedImages(){
       <tr><td class="left" colspan="2">TOTAL DOCUMENTADO PAGADO EN BENEFICIO DE LA MENOR</td><td class="right">$14,745.27</td></tr>
     </tfoot>
   </table>
-  <div class="saldo-row saldo-neg" style="margin-top:12px;">
-    <div><div class="label">Deuda pendiente según SUPA (Feb 2025 – Jun 2026):</div><div style="font-size:8.5pt;color:#777;margin-top:2px;">Período reclamado en la demanda de ejecución</div></div>
+  <div class="saldo-row saldo-neg">
+    <div><div class="label">Deuda pendiente según SUPA (Feb 2025 – Jun 2026):</div></div>
     <div class="amount">$2,841.48</div>
   </div>
   <div class="saldo-row saldo-pos">
     <div><div class="label">Excedente documentado por vías alternativas (colegio neto + transferencias directas):</div></div>
     <div class="amount">$9,102.41</div>
   </div>
-  <div class="nota" style="margin-top:8px;"><strong>Conclusión:</strong> Los pagos realizados por vías alternativas al SUPA superan ampliamente la deuda reclamada. Se solicita la convalidación conforme a la FAQ 17 del SUPA y la normativa aplicable.</div>
-
-
-
-/div>
-
-<div class="pagina">
+  <div class="nota"><strong>Conclusión:</strong> Los pagos por vías alternativas al SUPA superan ampliamente la deuda reclamada. Se solicita la convalidación conforme a la FAQ 17 del SUPA y la normativa aplicable.</div>
+</div>
+<!-- PÁGINA 5: VI Comprobantes 1-4 -->
 <div class="pagina">
   <div class="page-header">
     <span>Juicio No. 09U02-2026-00417 – Sección VI: Evidencia Documental</span>
@@ -330,6 +285,7 @@ function loadSavedImages(){
   <div class="ev-grid" id="grid-ev-1-4"></div>
 </div>
 
+<!-- PÁGINA 6: VI Comprobantes 5-8 -->
 <div class="pagina">
   <div class="page-header">
     <span>Juicio No. 09U02-2026-00417 – Sección VI: Evidencia Documental</span>
@@ -339,6 +295,7 @@ function loadSavedImages(){
   <div class="ev-grid" id="grid-ev-5-8"></div>
 </div>
 
+<!-- PÁGINA 7: VI Comprobantes 9-12 -->
 <div class="pagina">
   <div class="page-header">
     <span>Juicio No. 09U02-2026-00417 – Sección VI: Evidencia Documental</span>
@@ -348,6 +305,7 @@ function loadSavedImages(){
   <div class="ev-grid" id="grid-ev-9-12"></div>
 </div>
 
+<!-- PÁGINA 8: VI Comprobantes 13-14 -->
 <div class="pagina">
   <div class="page-header">
     <span>Juicio No. 09U02-2026-00417 – Sección VI: Evidencia Documental</span>
@@ -357,6 +315,7 @@ function loadSavedImages(){
   <div class="ev-grid" id="grid-ev-13-14"></div>
 </div>
 
+<!-- PÁGINA 9: VII WhatsApp 1-2 -->
 <div class="pagina">
   <div class="page-header">
     <span>Juicio No. 09U02-2026-00417 – Sección VII: Comunicaciones</span>
@@ -367,6 +326,7 @@ function loadSavedImages(){
   <div class="ev-grid" id="grid-wa-1-2"></div>
 </div>
 
+<!-- PÁGINA 10: VII WhatsApp 3-4 -->
 <div class="pagina">
   <div class="page-header">
     <span>Juicio No. 09U02-2026-00417 – Sección VII: Comunicaciones</span>
@@ -376,6 +336,7 @@ function loadSavedImages(){
   <div class="ev-grid" id="grid-wa-3-4"></div>
 </div>
 
+<!-- PÁGINA 11: VII WhatsApp 5 -->
 <div class="pagina">
   <div class="page-header">
     <span>Juicio No. 09U02-2026-00417 – Sección VII: Comunicaciones</span>
@@ -384,6 +345,8 @@ function loadSavedImages(){
   <div class="seccion-titulo">VII. Evidencia de Comunicaciones – Solicitudes de Pago Directo (5)</div>
   <div class="ev-grid single" id="grid-wa-5"></div>
 </div>
+<!-- PÁGINA 12: VIII Fundamento + IX Petición + Firma -->
+<div class="pagina">
   <div class="page-header">
     <span>Juicio No. 09U02-2026-00417 &nbsp;|&nbsp; Código SUPA: 0901-203105</span>
     <span>Alimentante: Johnny Alonso Bravo Loor</span>
@@ -394,7 +357,7 @@ function loadSavedImages(){
     <div class="pregunta">Pregunta 10: ¿Puede el beneficiario solicitar el cambio de la cuenta bancaria?</div>
     El beneficiario/a tiene la libertad de escoger la entidad bancaria donde desea recibir el dinero. Si quiere un cambio, puede solicitarlo mediante una petición dirigida al juez.
   </div>
-  <div class="legal-box" style="margin-top:8px;">
+  <div class="legal-box" style="margin-top:6px;">
     <div class="pregunta">Pregunta 17: Alimentantes que depositan directamente en cuentas personales sin usar el código SUPA. ¿Cuál es la recomendación?</div>
     Si el alimentante dispone de un código de tarjeta SUPA y no lo utiliza, debe presentar ante el juez competente toda la documentación de soporte de los pagos realizados en la cuenta personal de la beneficiaria/o y solicitar la actualización correspondiente en el SUPA.
   </div>
@@ -419,32 +382,10 @@ function loadSavedImages(){
     </div>
     <div class="firma-box">
       <div class="firma-espacio"></div>
-      <div class="linea"><strong>Abogado/a Patrocinador/a</strong><br>Matr
-</div>
-<script>
-
-// ===== PERSISTENCIA
-
-// ===== PERSISTENCIA DE IMÁGENES EN LOCALSTORAGE =====
-function saveImage(id, dataUrl){
-  try { localStorage.setItem('img_'+id, dataUrl); } catch(e){}
-}
-function loadSavedImages(){
-  const ids = [];
-  comprobantes.forEach(c => ids.push('ev-'+c.num));
-  whatsapps.forEach(w => ids.push('wa-'+w.num));
-  ids.forEach(function(id){
-    const saved = localStorage.getItem('img_'+id);
-    if(saved){
-      const img = document.getElementById('img-'+id);
-      const inner = document.getElementById('inner-'+id);
-      if(img){ img.src = saved; img.classList.add('loaded'); }
-      if(inner){ inner.style.display = 'none'; }
-    }
-  });
-}
-</script>
-
+      <div class="linea"><strong>Abogado/a Patrocinador/a</strong><br>Matrícula No. _______________</div>
+    </div>
+  </div>
+  <div class="doc-pie">Daule, Guayas – 06 de junio de 2026 &nbsp;|&nbsp; Juicio No. 09U02-2026-00417 &nbsp;|&nbsp; Código SUPA: 0901-203105</div>
 </div>
 <script>
 const comprobantes = [
@@ -475,19 +416,19 @@ function makeEvCard(item){
   return `<div class="ev-card">
     <div class="ev-card-header">
       <span><span class="ev-num">${item.num}</span>${item.title}</span>
-      <span style="opacity:0.8;font-size:7.5pt">${item.date}</span>
+      <span style="opacity:0.8;font-size:7pt">${item.date}</span>
     </div>
     <div class="ev-card-body">
       <img id="img-${id}" alt="Comprobante ${item.num}">
       <div class="inner" id="inner-${id}">
         <button class="ev-upload-btn" onclick="triggerUpload('${id}')">+ Subir imagen</button>
-        <span class="ev-upload-hint">JPG o PNG – formato 9:16</span>
+        <span class="ev-upload-hint">JPG o PNG</span>
       </div>
     </div>
     <div class="ev-card-footer">
       <span><span class="ef-label">Remitente</span>${item.remitente}</span>
       <span><span class="ef-label">Fecha</span>${item.fecha}&nbsp;&nbsp;<span class="ef-label">Monto</span>${item.monto}</span>
-      <span><span class="ef-label">Ref / Concepto</span>${item.ref}</span>
+      <span><span class="ef-label">Ref</span>${item.ref}</span>
     </div>
     <input type="file" id="file-${id}" accept="image/*" onchange="loadImage('${id}',this)">
   </div>`;}
@@ -499,7 +440,7 @@ function makeWaCard(item){
       <img id="img-${id}" alt="WhatsApp ${item.num}">
       <div class="inner" id="inner-${id}">
         <button class="wa-upload-btn" onclick="triggerUpload('${id}')">+ Subir captura</button>
-        <span class="ev-upload-hint">JPG o PNG – formato 9:16</span>
+        <span class="ev-upload-hint">JPG o PNG</span>
       </div>
     </div>
     <div class="wa-card-footer">
@@ -517,9 +458,25 @@ function loadImage(id,input){
     img.src=e.target.result;
     img.classList.add('loaded');
     inner.style.display='none';
-    saveImage(id,e.target.result);
+    try{localStorage.setItem('img_'+id,e.target.result);}catch(err){}
   };
   reader.readAsDataURL(input.files[0]);
+}
+function loadSavedImages(){
+  const ids=[];
+  comprobantes.forEach(c=>ids.push('ev-'+c.num));
+  whatsapps.forEach(w=>ids.push('wa-'+w.num));
+  ids.forEach(function(id){
+    try{
+      const saved=localStorage.getItem('img_'+id);
+      if(saved){
+        const img=document.getElementById('img-'+id);
+        const inner=document.getElementById('inner-'+id);
+        if(img){img.src=saved;img.classList.add('loaded');}
+        if(inner){inner.style.display='none';}
+      }
+    }catch(err){}
+  });
 }
 document.getElementById('grid-ev-1-4').innerHTML=comprobantes.slice(0,4).map(makeEvCard).join('');
 document.getElementById('grid-ev-5-8').innerHTML=comprobantes.slice(4,8).map(makeEvCard).join('');
@@ -528,7 +485,7 @@ document.getElementById('grid-ev-13-14').innerHTML=comprobantes.slice(12,14).map
 document.getElementById('grid-wa-1-2').innerHTML=whatsapps.slice(0,2).map(makeWaCard).join('');
 document.getElementById('grid-wa-3-4').innerHTML=whatsapps.slice(2,4).map(makeWaCard).join('');
 document.getElementById('grid-wa-5').innerHTML=whatsapps.slice(4,5).map(makeWaCard).join('');
-window.addEventListener('load', function(){ setTimeout(loadSavedImages, 300); });
+window.addEventListener('load',function(){setTimeout(loadSavedImages,300);});
 </script>
 </body>
 </html>

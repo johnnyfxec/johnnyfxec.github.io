@@ -64,7 +64,7 @@ table.dt tfoot td.left{text-align:left;}
 .ev-card-header{background:var(--gris-medio);color:white;padding:6px 10px;font-size:8.5pt;font-weight:bold;display:flex;justify-content:space-between;align-items:center;}
 .ev-card-header .ev-num{background:white;color:var(--gris-oscuro);border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-weight:bold;font-size:7.5pt;margin-right:6px;flex-shrink:0;}
 .ev-card-body{position:relative;background:#FAFAFA;border-bottom:1px solid #DDD;}
-.ev-card-body::before{content:'';display:block;padding-top:177.78%;}
+.ev-card-body::before{content:'';display:block;padding-top:133%;}
 .ev-card-body .inner{position:absolute;top:0;left:0;right:0;bottom:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;}
 .ev-card-body img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;display:none;}
 .ev-card-body img.loaded{display:block;}
@@ -77,7 +77,7 @@ input[type="file"]{display:none;}
 .wa-card{border:1.5px dashed var(--verde-wa);overflow:hidden;}
 .wa-card-header{background:var(--verde-wa);color:white;padding:6px 10px;font-size:8.5pt;font-weight:bold;}
 .wa-card-body{position:relative;background:#FAFAFA;border-bottom:1px solid #DDD;}
-.wa-card-body::before{content:'';display:block;padding-top:177.78%;}
+.wa-card-body::before{content:'';display:block;padding-top:133%;}
 .wa-card-body .inner{position:absolute;top:0;left:0;right:0;bottom:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;}
 .wa-card-body img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;display:none;}
 .wa-card-body img.loaded{display:block;}
@@ -359,19 +359,28 @@ function loadSavedImages(){
 <div class="pagina">
   <div class="page-header">
     <span>Juicio No. 09U02-2026-00417 – Sección VI: Evidencia Documental</span>
-    <span>Comprobantes 1–6</span>
+    <span>Comprobantes 1–4</span>
   </div>
-  <div class="seccion-titulo">VI. Evidencia Documental – Comprobantes de Transferencias (1–6)</div>
-  <div class="ev-grid" id="grid-ev-1-6"></div>
+  <div class="seccion-titulo">VI. Evidencia Documental – Comprobantes de Transferencias (1–4)</div>
+  <div class="ev-grid" id="grid-ev-1-4"></div>
 </div>
 
 <div class="pagina">
   <div class="page-header">
     <span>Juicio No. 09U02-2026-00417 – Sección VI: Evidencia Documental</span>
-    <span>Comprobantes 7–12</span>
+    <span>Comprobantes 5–8</span>
   </div>
-  <div class="seccion-titulo">VI. Evidencia Documental – Comprobantes de Transferencias (7–12)</div>
-  <div class="ev-grid" id="grid-ev-7-12"></div>
+  <div class="seccion-titulo">VI. Evidencia Documental – Comprobantes de Transferencias (5–8)</div>
+  <div class="ev-grid" id="grid-ev-5-8"></div>
+</div>
+
+<div class="pagina">
+  <div class="page-header">
+    <span>Juicio No. 09U02-2026-00417 – Sección VI: Evidencia Documental</span>
+    <span>Comprobantes 9–12</span>
+  </div>
+  <div class="seccion-titulo">VI. Evidencia Documental – Comprobantes de Transferencias (9–12)</div>
+  <div class="ev-grid" id="grid-ev-9-12"></div>
 </div>
 
 <div class="pagina">
@@ -486,8 +495,9 @@ function loadImage(id,input){
   };
   reader.readAsDataURL(input.files[0]);
 }
-document.getElementById('grid-ev-1-6').innerHTML=comprobantes.slice(0,6).map(makeEvCard).join('');
-document.getElementById('grid-ev-7-12').innerHTML=comprobantes.slice(6,12).map(makeEvCard).join('');
+document.getElementById('grid-ev-1-4').innerHTML=comprobantes.slice(0,4).map(makeEvCard).join('');
+document.getElementById('grid-ev-5-8').innerHTML=comprobantes.slice(4,8).map(makeEvCard).join('');
+document.getElementById('grid-ev-9-12').innerHTML=comprobantes.slice(8,12).map(makeEvCard).join('');
 document.getElementById('grid-ev-13-14').innerHTML=comprobantes.slice(12,14).map(makeEvCard).join('');
 document.getElementById('grid-wa-1-2').innerHTML=whatsapps.slice(0,2).map(makeWaCard).join('');
 document.getElementById('grid-wa-3-4').innerHTML=whatsapps.slice(2,4).map(makeWaCard).join('');

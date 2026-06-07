@@ -93,79 +93,34 @@ input[type="file"]{display:none;}
 .firma-espacio{height:50px;}
 .doc-pie{text-align:center;font-size:8pt;color:#888;margin-top:20px;padding-top:8px;border-top:1px solid #EEE;}
 @media print{
-  @page{size:A4 portrait;margin:10mm 12mm 10mm 14mm;}
-  body{background:white;font-size:9pt;}
+  @page{size:A4 portrait;margin:14mm 16mm 14mm 18mm;}
+  body{background:white!important;}
   #toolbar{display:none!important;}
   .pagina{
-    margin:0;
-    box-shadow:none;
-    padding:0;
     width:100%;
-    min-height:unset;
-    height:auto;
+    margin:0!important;
+    padding:0!important;
+    box-shadow:none!important;
+    background:white!important;
     page-break-after:always;
     break-after:page;
-    overflow:visible;
   }
   .pagina:last-child{page-break-after:avoid;break-after:avoid;}
-  .ev-upload-btn,.ev-upload-hint,.wa-upload-btn,.inner{display:none!important;}
-  .ev-card-body img,.wa-card-body img{display:block!important;}
-  .ev-card-body::before,.wa-card-body::before{padding-top:120%;}
-  table.dt{font-size:7pt;width:100%;}
-  table.dt thead th,table.dt tbody td,table.dt tfoot td{padding:2px 4px;line-height:1.2;}
-  .datos-table td{padding:2px 5px;font-size:8pt;}
-  .nota{font-size:7.5pt;padding:4px 8px;margin:4px 0;}
-  .legal-box{font-size:8pt;padding:6px 10px;margin:4px 0;}
-  p{font-size:8.5pt;margin-bottom:4px;line-height:1.4;}
-  .seccion-titulo{font-size:9pt;margin:8px 0 4px;}
-  .sub-titulo{font-size:8.5pt;margin:6px 0 3px;}
-  .peticion-lista li{font-size:8.5pt;padding:3px 0 3px 22px;line-height:1.4;}
-  .saldo-row{padding:6px 10px;}
-  .saldo-neg .amount,.saldo-pos .amount{font-size:11pt;}
-  .doc-main-title{font-size:11pt;}
-  .doc-institution{font-size:8.5pt;}
-  .page-header{font-size:7pt;}
-  .ev-card-footer,.wa-card-footer{font-size:7pt;padding:3px 8px;}
-  .ef-label,.rel-label{font-size:6.5pt;}
-  .ev-card-header,.wa-card-header{font-size:7.5pt;padding:4px 8px;}
-  .firma-espacio{height:30px;}
-  .firma-grid{margin-top:20px;gap:20px;}
-  .firma-box .linea{font-size:8pt;}
-  .doc-pie{font-size:7pt;margin-top:10px;}
-  .ev-grid{gap:8px;}
+  .ev-upload-btn,.ev-upload-hint,.wa-upload-btn{display:none!important;}
+  .ev-card-body img.loaded,.wa-card-body img.loaded{display:block!important;}
+  .ev-card-body .inner,.wa-card-body .inner{display:none!important;}
 }
 </style>
 </head>
 <body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <div id="contenido">
 <div id="toolbar">
   <span style="font-size:10pt;opacity:0.7;">Juicio No. 09U02-2026-00417 &nbsp;|&nbsp; Johnny Alonso Bravo Loor</span>
-  <button id="btn-pdf" onclick="generarPDF()">⬇ DESCARGAR PDF</button>
+  <button id="btn-pdf" onclick="window.print()">🖨 IMPRIMIR / GUARDAR PDF</button>
 </div>
 <script>
-function generarPDF(){
-  const btn = document.getElementById('btn-pdf');
-  btn.textContent = 'Generando...';
-  btn.disabled = true;
-  document.getElementById('toolbar').style.display = 'none';
-  document.body.style.background = 'white';
-  const el = document.getElementById('contenido');
-  const opt = {
-    margin: 0,
-    filename: 'Descargo_Juicio_09U02-2026-00417.pdf',
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
-    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-    pagebreak: { mode: 'avoid-all', before: '.pagina' }
-  };
-  html2pdf().set(opt).from(el).save().then(function(){
-    document.getElementById('toolbar').style.display = 'flex';
-    document.body.style.background = '#E8E8E8';
-    btn.textContent = '⬇ DESCARGAR PDF';
-    btn.disabled = false;
-  });
-}
+
+// ===== PERSISTENCIA
 
 // ===== PERSISTENCIA DE IMÁGENES EN LOCALSTORAGE =====
 function saveImage(id, dataUrl){

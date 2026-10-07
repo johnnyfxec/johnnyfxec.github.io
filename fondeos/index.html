@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Fondeos — johnnyfxec</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+:root {
+  --c-bg:        #0A0A0A;
+  --c-card:      #141414;
+  --c-border:    #252525;
+  --c-gold:      #C9A84C;
+  --c-gold-lt:   #E8C97A;
+  --c-gold-dim:  rgba(201,168,76,0.10);
+  --c-gold-ring: rgba(201,168,76,0.35);
+  --c-text:      #F0EDE8;
+  --c-muted:     #7A7672;
+  --c-success:   #3FB950;
+  --c-danger:    #E5484D;
+
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+
+  --text-xs:   0.70rem;
+  --text-sm:   0.825rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.25rem;
+  --text-2xl:  1.5rem;
+  --text-3xl:  2rem;
+  --text-hero: clamp(2rem, 5vw, 3.4rem);
+
+  --s1: 8px; --s2: 16px; --s3: 24px; --s4: 32px; --s5: 40px; --s6: 48px; --s8: 64px;
+  --r-sm: 6px; --r-md: 12px; --r-lg: 16px; --r-pill: 999px;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+
+body {
+  font-family: var(--font);
+  font-size: var(--text-base);
+  font-weight: 400;
+  line-height: 1.6;
+  background: var(--c-bg);
+  color: var(--c-text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+/* ───────── DECK (motor tomado de latam.luis-velez.com) ───────── */
+.deck{
+  position:fixed;
+  top:0;left:0;
+  width:100%;
+  will-change:transform;
+  transition:transform 0.8s cubic-bezier(0.76,0,0.24,1);
+}
+
+.card{
+  position:relative;
+  width:100%;height:100vh;height:100dvh;
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding: var(--s6) var(--s4);
+  padding-top: calc(var(--s6) + env(safe-area-inset-top, 0px));
+  padding-bottom: calc(var(--s6) + env(safe-area-inset-bottom, 0px));
+}
+
+.card-inner{
+  max-width: 760px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* ───────── RAIL de progreso ───────── */
+.rail{
+  position:fixed;
+  right:14px;top:50%;
+  transform:translateY(-50%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:5px;
+  z-index:200;
+  max-height: 80vh;
+  overflow: visible;
+}
+
+.rail-dot{
+  width:5px;height:5px;
+  border-radius:50%;
+  background:rgba(240,237,232,0.2);
+  border:1px solid rgba(240,237,232,0.3);
+  cursor:pointer;
+  transition:all 0.35s ease;
+  flex-shrink: 0;
+}
+
+.rail-dot.active{
+  background:var(--c-gold);
+  border-color:var(--c-gold);
+  box-shadow:0 0 8px rgba(201,168,76,0.5);
+  height:16px;
+  border-radius:3px;
+}
+
+.rail-dot.done{
+  background: var(--c-gold-ring);
+  border-color: var(--c-gold-ring);
+}
+
+@media (max-width: 640px){
+  .rail{ right:8px; gap:4px; }
+}
+
+/* ───────── TIPOGRAFÍA GENERAL ───────── */
+.eyebrow{
+  display:inline-block;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  background: var(--c-gold-dim);
+  border: 1px solid var(--c-gold-ring);
+  border-radius: var(--r-pill);
+  padding: var(--s1) var(--s3);
+  margin-bottom: var(--s4);
+}
+
+h1.titulo{
+  font-size: var(--text-hero);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: var(--s3);
+  letter-spacing: -0.02em;
+}
+
+h1.titulo em, h2.titulo em{
+  font-style: normal;
+  color: var(--c-gold);
+}
+
+h2.titulo{
+  font-size: clamp(1.6rem, 4vw, var(--text-3xl));
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: var(--s3);
+  letter-spacing: -0.01em;
+}
+
+.subtitulo{
+  font-size: var(--text-lg);
+  color: var(--c-muted);
+  font-weight: 400;
+  max-width: 560px;
+  margin: 0 auto var(--s4);
+}
+
+.fase-tag{
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+  margin-bottom: var(--s2);
+}
+
+/* ───────── TARJETA DE CONTENIDO (estilo tarea, de la guía) ───────── */
+.caja{
+  background: var(--c-card);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-lg);
+  padding: var(--s5);
+  text-align: left;
+  margin-top: var(--s3);
+}
+
+.icono{
+  font-size: 2.2rem;
+  margin-bottom: var(--s2);
+  display: block;
+}
+
+.lista{
+  list-style: none;
+  text-align: left;
+  margin-top: var(--s3);
+}
+
+.lista li{
+  position: relative;
+  padding-left: var(--s4);
+  margin-bottom: var(--s2);
+  color: var(--c-text);
+  font-size: var(--text-base);
+}
+
+.lista li::before{
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--c-gold);
+  font-weight: 700;
+}
+
+.nota{
+  margin-top: var(--s4);
+  padding: var(--s3);
+  background: var(--c-gold-dim);
+  border: 1px solid var(--c-gold-ring);
+  border-radius: var(--r-md);
+  font-size: var(--text-sm);
+  color: var(--c-gold-lt);
+  text-align: left;
+}
+
+.ejemplo{
+  margin-top: var(--s3);
+  padding: var(--s3);
+  background: rgba(255,255,255,0.03);
+  border-left: 3px solid var(--c-gold);
+  border-radius: var(--r-sm);
+  font-size: var(--text-sm);
+  color: var(--c-muted);
+  text-align: left;
+}
+
+.ejemplo strong{ color: var(--c-text); }
+
+/* ───────── GRID DE EMPRESAS / LINKS ───────── */
+.grid-empresas{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--s3);
+  margin-top: var(--s4);
+}
+
+.empresa-card{
+  background: var(--c-card);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-md);
+  padding: var(--s3);
+  text-decoration: none;
+  color: var(--c-text);
+  transition: all 0.25s ease;
+  display: block;
+  text-align: center;
+}
+
+.empresa-card:hover, .empresa-card:active{
+  border-color: var(--c-gold);
+  background: var(--c-gold-dim);
+}
+
+.empresa-nombre{
+  font-weight: 700;
+  font-size: var(--text-base);
+  margin-bottom: 2px;
+}
+
+.empresa-link{
+  font-size: var(--text-xs);
+  color: var(--c-muted);
+}
+
+/* ───────── TABLA COMPARATIVA ───────── */
+.tabla-tipos{
+  display: grid;
+  gap: var(--s2);
+  margin-top: var(--s4);
+  text-align: left;
+}
+
+.tipo-row{
+  background: var(--c-card);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-md);
+  padding: var(--s3);
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+}
+
+.tipo-row .icono{ margin:0; font-size: 1.6rem; }
+.tipo-row .tipo-texto{ flex: 1; }
+.tipo-row .tipo-nombre{ font-weight: 700; font-size: var(--text-base); }
+.tipo-row .tipo-desc{ font-size: var(--text-sm); color: var(--c-muted); }
+
+/* ───────── CALCULADORA Y EJERCICIOS ───────── */
+.herramienta{
+  background: var(--c-card);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-lg);
+  padding: var(--s4);
+  text-align: left;
+  margin-top: var(--s3);
+}
+
+.campo{ margin-bottom: var(--s3); }
+
+.campo label{
+  display: block;
+  font-size: var(--text-sm);
+  color: var(--c-muted);
+  margin-bottom: var(--s1);
+  font-weight: 600;
+}
+
+.campo input, .campo select{
+  width: 100%;
+  background: var(--c-bg);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-sm);
+  padding: var(--s2);
+  color: var(--c-text);
+  font-family: var(--font);
+  font-size: var(--text-base);
+}
+
+.campo input:focus, .campo select:focus{
+  outline: none;
+  border-color: var(--c-gold);
+}
+
+.fila-doble{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s3);
+}
+
+.resultado{
+  margin-top: var(--s4);
+  padding: var(--s3);
+  background: var(--c-gold-dim);
+  border: 1px solid var(--c-gold-ring);
+  border-radius: var(--r-md);
+}
+
+.resultado-fila{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--s1) 0;
+  font-size: var(--text-sm);
+}
+
+.resultado-fila:not(:last-child){
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+}
+
+.resultado-label{ color: var(--c-muted); }
+.resultado-valor{ font-weight: 700; color: var(--c-gold-lt); font-size: var(--text-lg); }
+
+.btn{
+  background: var(--c-gold);
+  color: #000;
+  border: none;
+  border-radius: var(--r-pill);
+  padding: var(--s2) var(--s4);
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: var(--text-base);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s1);
+}
+
+.btn:hover{ background: var(--c-gold-lt); transform: translateY(-1px); }
+.btn:active{ transform: translateY(0); }
+
+.btn-ghost{
+  background: transparent;
+  color: var(--c-gold);
+  border: 1px solid var(--c-gold-ring);
+}
+.btn-ghost:hover{ background: var(--c-gold-dim); }
+
+.btn-start{
+  margin-top: var(--s5);
+}
+
+/* ───────── EJERCICIO (resultado correcto/incorrecto) ───────── */
+.ejercicio-enunciado{
+  font-size: var(--text-lg);
+  margin-bottom: var(--s3);
+  line-height: 1.5;
+}
+
+.ejercicio-enunciado .valor{
+  color: var(--c-gold);
+  font-weight: 700;
+}
+
+.feedback{
+  margin-top: var(--s3);
+  padding: var(--s3);
+  border-radius: var(--r-md);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  display: none;
+}
+
+.feedback.ok{
+  display: block;
+  background: rgba(63,185,80,0.1);
+  border: 1px solid rgba(63,185,80,0.4);
+  color: var(--c-success);
+}
+
+.feedback.fail{
+  display: block;
+  background: rgba(229,72,77,0.1);
+  border: 1px solid rgba(229,72,77,0.4);
+  color: var(--c-danger);
+}
+
+/* ───────── FASE 3 — mini badge de "concepto / ejemplo" ───────── */
+.tag-concepto, .tag-ejemplo{
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px var(--s2);
+  border-radius: var(--r-sm);
+  margin-bottom: var(--s1);
+}
+.tag-concepto{ background: rgba(240,237,232,0.08); color: var(--c-muted); }
+.tag-ejemplo{ background: var(--c-gold-dim); color: var(--c-gold); }
+
+/* ───────── RESPONSIVE ───────── */
+@media (max-width: 640px){
+  .card{ padding: var(--s4) var(--s3); padding-top: calc(var(--s4) + env(safe-area-inset-top,0px)); }
+  h1.titulo{ font-size: clamp(1.7rem, 7vw, 2.4rem); }
+  .fila-doble{ grid-template-columns: 1fr; }
+  .caja, .herramienta{ padding: var(--s3); }
+}
+
+/* Scrollbar discreta dentro de cada card si el contenido excede pantalla */
+.card::-webkit-scrollbar{ width: 4px; }
+.card::-webkit-scrollbar-thumb{ background: var(--c-border); border-radius: 2px; }
+
+.footer-nota{
+  margin-top: var(--s5);
+  font-size: var(--text-xs);
+  color: var(--c-muted);
+}
+</style>
+</head>
+<body>
+
+<nav class="rail" id="rail"></nav>
+
+<div class="deck" id="deck">
+
+  <!-- CARD 0 — PORTADA -->
+  <div class="card" id="card-0">
+    <div class="card-inner">
+      <span class="eyebrow">johnnyfxec · Capacitación</span>
+      <h1 class="titulo">Cuentas de <em>fondeo</em>,<br>bien entendidas.</h1>
+      <p class="subtitulo">Cómo apalancar capital ajeno para operar — y las reglas que tenés que dominar antes de arriesgar un centavo.</p>
+      <button class="btn btn-start" onclick="goTo(1)">Empezar <span>→</span></button>
+    </div>
+  </div>
+
+  <!-- CARD 1 — QUÉ ES UNA CUENTA DE FONDEO -->
+  <div class="card" id="card-1">
+    <div class="card-inner">
+      <span class="eyebrow">Fase 0 · Apertura</span>
+      <h2 class="titulo">¿Qué es una cuenta de fondeo?</h2>
+      <div class="caja">
+        <span class="icono">🤝</span>
+        <p>Una empresa de fondeo (<em>prop firm</em>) te presta <strong>su capital</strong> para operar en los mercados. Vos ponés la disciplina y el plan de trading; ellos ponen el dinero.</p>
+        <ul class="lista">
+          <li>Pagás un <strong>fee de acceso</strong> para demostrar que sabés operar con control de riesgo.</li>
+          <li>Si cumplís las reglas, te dan una cuenta financiada de verdad.</li>
+          <li>Ganás un porcentaje de las ganancias — sin arriesgar tu propio capital.</li>
+        </ul>
+        <div class="nota">Es una oportunidad real de apalancarte de grandes capitales con el mismo trabajo que ya hacés — no es un atajo. Exige disciplina y conocer las reglas al dedillo.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 2 — EMPRESAS CON LAS QUE CONFIAMOS -->
+  <div class="card" id="card-2">
+    <div class="card-inner">
+      <span class="eyebrow">Fase 1 · Con quién trabajamos</span>
+      <h2 class="titulo">Las empresas con las que confiamos</h2>
+      <p class="subtitulo">Estas son las que usamos nosotros mismos, dentro de nuestra organización.</p>
+      <div class="grid-empresas">
+        <div class="empresa-card"><div class="empresa-nombre">FTMO</div></div>
+        <div class="empresa-card"><div class="empresa-nombre">5ERS</div></div>
+        <div class="empresa-card"><div class="empresa-nombre">Alpha Capital</div></div>
+        <div class="empresa-card"><div class="empresa-nombre">FundingPips</div></div>
+        <div class="empresa-card"><div class="empresa-nombre">Atmos</div></div>
+        <div class="empresa-card"><div class="empresa-nombre">Breakout</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 3 — CÓMO LEER LAS REGLAS -->
+  <div class="card" id="card-3">
+    <div class="card-inner">
+      <span class="eyebrow">Fase 1 · Con quién trabajamos</span>
+      <h2 class="titulo">Cómo leer las reglas de cada una</h2>
+      <div class="caja">
+        <span class="icono">📖</span>
+        <p>Las reglas exactas viven en la <strong>FAQ oficial</strong> de cada empresa. Entrá directo ahí antes de decidir qué tipo de cuenta te conviene.</p>
+        <div class="nota">⚠️ Cambiá el idioma <strong>dentro de la página oficial</strong> (casi todas tienen selector de idioma). No uses el traductor de Google — puede introducir errores que te hagan perder tiempo o dinero al elegir mal.</div>
+      </div>
+      <div class="grid-empresas">
+        <a class="empresa-card" href="https://help.atmosfunded.com/en/" target="_blank">
+          <div class="empresa-nombre">Atmos</div><div class="empresa-link">Ver FAQ →</div>
+        </a>
+        <a class="empresa-card" href="https://ftmo.com/es/faq/" target="_blank">
+          <div class="empresa-nombre">FTMO</div><div class="empresa-link">Ver FAQ →</div>
+        </a>
+        <a class="empresa-card" href="https://the5ers.com/faqs/" target="_blank">
+          <div class="empresa-nombre">5ERS</div><div class="empresa-link">Ver FAQ →</div>
+        </a>
+        <a class="empresa-card" href="https://fundingpips.com/trading-objectives" target="_blank">
+          <div class="empresa-nombre">FundingPips</div><div class="empresa-link">Trading Objectives →</div>
+        </a>
+        <a class="empresa-card" href="https://help.fundingpips.com/hc/en-us" target="_blank">
+          <div class="empresa-nombre">FundingPips</div><div class="empresa-link">FAQ →</div>
+        </a>
+        <a class="empresa-card" href="https://help.alphacapitalgroup.uk/en/" target="_blank">
+          <div class="empresa-nombre">Alpha Capital</div><div class="empresa-link">Ver FAQ →</div>
+        </a>
+        <a class="empresa-card" href="https://intercom.help/breakoutprop/en/" target="_blank">
+          <div class="empresa-nombre">Breakout</div><div class="empresa-link">Ver FAQ →</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 4 — MAPA DE TIPOS DE PRUEBA -->
+  <div class="card" id="card-4">
+    <div class="card-inner">
+      <span class="eyebrow">Fase 2 · Tipos de programa</span>
+      <h2 class="titulo">No todas las pruebas son iguales</h2>
+      <p class="subtitulo">El tipo correcto depende de qué estás optimizando: costo, velocidad de cobro, o margen de error.</p>
+      <div class="tabla-tipos">
+        <div class="tipo-row"><span class="icono">🧱</span><div class="tipo-texto"><div class="tipo-nombre">2 Fases</div><div class="tipo-desc">Menor costo · más tiempo · la cuenta para quedarte</div></div></div>
+        <div class="tipo-row"><span class="icono">⚡</span><div class="tipo-texto"><div class="tipo-nombre">1 Fase</div><div class="tipo-desc">Punto medio · menos pasos · fee más alto</div></div></div>
+        <div class="tipo-row"><span class="icono">💨</span><div class="tipo-texto"><div class="tipo-nombre">Instantánea</div><div class="tipo-desc">Fondeada desde el día 1 · dinero rápido · más cara</div></div></div>
+        <div class="tipo-row"><span class="icono">🔁</span><div class="tipo-texto"><div class="tipo-nombre">Pasa primero, paga después</div><div class="tipo-desc">NOVA (Atmos) · entrada casi gratis</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 5 — 2 FASES -->
+  <div class="card" id="card-5">
+    <div class="card-inner">
+      <span class="fase-tag">Tipo de programa</span>
+      <h2 class="titulo">2 Fases: la cuenta para quedarte</h2>
+      <div class="caja">
+        <span class="icono">🧱</span>
+        <p><strong>Usala cuando:</strong> vas a tomarte el tiempo de demostrar consistencia y pensás quedarte con esa cuenta como un activo de largo plazo.</p>
+        <ul class="lista">
+          <li>Menor fee de entrada que las demás.</li>
+          <li>Más pasos y más tiempo hasta estar fondeado.</li>
+          <li>Ideal para quien recién empieza o busca la cuenta "definitiva".</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 6 — 1 FASE -->
+  <div class="card" id="card-6">
+    <div class="card-inner">
+      <span class="fase-tag">Tipo de programa</span>
+      <h2 class="titulo">1 Fase: el punto medio</h2>
+      <div class="caja">
+        <span class="icono">⚡</span>
+        <p><strong>Usala cuando:</strong> querés menos pasos que 2 fases, pero todavía estás dispuesto a pasar una evaluación antes de que te fondeen.</p>
+        <ul class="lista">
+          <li>Fee más alto que 2 fases, a cambio de velocidad.</li>
+          <li>Un solo examen antes de la cuenta real.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 7 — INSTANTÁNEA -->
+  <div class="card" id="card-7">
+    <div class="card-inner">
+      <span class="fase-tag">Tipo de programa</span>
+      <h2 class="titulo">Instantánea: dinero rápido</h2>
+      <div class="caja">
+        <span class="icono">💨</span>
+        <p><strong>Usala cuando:</strong> necesitás liquidez rápida y ya tenés la disciplina probada — acá no hay fase de práctica protegida.</p>
+        <ul class="lista">
+          <li>La cuenta ya está fondeada desde el día uno.</li>
+          <li>Cobrás apenas cumplís la regla de consistencia.</li>
+          <li>Fee más caro — exige mucha disciplina, cualquier error ya es con la cuenta real.</li>
+        </ul>
+        <div class="nota">Al retirar el 100% disponible, la cuenta no se pierde: resetea al capital inicial y seguís operando desde cero.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 8 — NOVA -->
+  <div class="card" id="card-8">
+    <div class="card-inner">
+      <span class="fase-tag">Tipo de programa · Caso Atmos</span>
+      <h2 class="titulo">NOVA: pasa primero, paga después</h2>
+      <div class="caja">
+        <span class="icono">🔁</span>
+        <p><strong>Usala cuando:</strong> querés entrar a probar con una inversión mínima, y recién pagar el valor real una vez que ya demostraste que podés pasar.</p>
+        <ul class="lista">
+          <li>Entrada a la evaluación: <strong>$5</strong>. Fase única, objetivo 5% total.</li>
+          <li>Riesgo diario: <strong>1% por activo</strong> (flotante + cerrado) — no es un total agregado como en otras cuentas.</li>
+          <li>Al pasar, pagás el valor real de la cuenta (ej. $184 para una de $25k) y activás el capital.</li>
+          <li>Al cobrar, la cuenta se cierra — pero podés volver a pagar esa misma prueba para reabrir sobre el capital ya validado, sin repetir la evaluación.</li>
+        </ul>
+        <div class="nota">Estas reglas son propias de NOVA y no entran en la calculadora genérica — revisá siempre la FAQ de Atmos para el detalle exacto.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 9 — RIESGO DIARIO -->
+  <div class="card" id="card-9">
+    <div class="card-inner">
+      <span class="fase-tag">Fase 3 · Reglas comunes</span>
+      <h2 class="titulo">Riesgo diario</h2>
+      <div class="caja">
+        <span class="tag-concepto">Concepto</span>
+        <p>El % máximo que podés perder <strong>en un solo día</strong> antes de romper la cuenta.</p>
+        <div class="ejemplo"><span class="tag-ejemplo">Ejemplo Atmos</span><br>Cuenta Instant de <strong>$10,000</strong>, riesgo diario <strong>3%</strong> → podés arriesgar máximo <strong>$300 al día</strong>.</div>
+      </div>
+      <div class="herramienta" id="ej-riesgo-diario">
+        <p class="ejercicio-enunciado" id="ej9-enunciado"></p>
+        <div class="campo"><label>Tu respuesta (valor máximo en $)</label><input type="number" id="ej9-input" placeholder="0"></div>
+        <button class="btn" onclick="verificarEj9()">Verificar</button>
+        <div class="feedback" id="ej9-feedback"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 10 — RIESGO TOTAL -->
+  <div class="card" id="card-10">
+    <div class="card-inner">
+      <span class="fase-tag">Fase 3 · Reglas comunes</span>
+      <h2 class="titulo">Riesgo total (con y sin trailing)</h2>
+      <div class="caja">
+        <span class="tag-concepto">Concepto</span>
+        <p>El % máximo de pérdida <strong>acumulada</strong> que podés tener sobre el capital inicial antes de romper la cuenta.</p>
+        <ul class="lista">
+          <li><strong>Estático:</strong> el límite queda fijo desde el inicio, no se mueve.</li>
+          <li><strong>Trailing:</strong> el límite "sigue" a tus ganancias — hasta que se congela (ver próxima card).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 11 — TRAILING RISK -->
+  <div class="card" id="card-11">
+    <div class="card-inner">
+      <span class="fase-tag">Fase 3 · Reglas comunes</span>
+      <h2 class="titulo">Trailing risk</h2>
+      <div class="caja">
+        <span class="tag-concepto">Concepto</span>
+        <p>El máximo de pérdida se mueve junto con tu equity — hasta que alcanzás cierto punto, donde se <strong>congela</strong> en el valor inicial de la cuenta.</p>
+        <div class="ejemplo"><span class="tag-ejemplo">Ejemplo Atmos</span><br>Cuentas Instant/NOVA: trailing del <strong>6–8%</strong>. Si la cuenta es de $10,000 y llegás a +10% de ganancia, el piso de pérdida máxima queda fijo en los $10,000 originales — ya no sigue subiendo.</div>
+      </div>
+      <div class="herramienta" id="ej-trailing">
+        <p class="ejercicio-enunciado" id="ej11-enunciado"></p>
+        <div class="campo"><label>Tu respuesta (¿en qué valor se congela el piso, en $?)</label><input type="number" id="ej11-input" placeholder="0"></div>
+        <button class="btn" onclick="verificarEj11()">Verificar</button>
+        <div class="feedback" id="ej11-feedback"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 12 — RIESGO POR OPERACIÓN -->
+  <div class="card" id="card-12">
+    <div class="card-inner">
+      <span class="fase-tag">Fase 3 · Reglas comunes</span>
+      <h2 class="titulo">Riesgo por operación</h2>
+      <div class="caja">
+        <span class="tag-concepto">Concepto</span>
+        <p>Una vez que sabés tu riesgo diario máximo, lo dividís en porciones — una por cada operación que planeás hacer en el día.</p>
+        <div class="ejemplo"><span class="tag-ejemplo">Ejemplo Atmos</span><br>$300/día ÷ <strong>6</strong> = $50 por operación, o ÷ <strong>8</strong> = $37.5 por operación. Nunca deberías necesitar las 6 u 8 para "quemar" la cuenta — es tu plan de trading el que evita llegar ahí.</div>
+      </div>
+      <div class="herramienta" id="ej-riesgo-op">
+        <p class="ejercicio-enunciado" id="ej12-enunciado"></p>
+        <div class="campo"><label>Tu respuesta (riesgo por operación, en $)</label><input type="number" id="ej12-input" placeholder="0"></div>
+        <button class="btn" onclick="verificarEj12()">Verificar</button>
+        <div class="feedback" id="ej12-feedback"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 13 — REGLA DE CONSISTENCIA -->
+  <div class="card" id="card-13">
+    <div class="card-inner">
+      <span class="fase-tag">Fase 3 · Reglas comunes</span>
+      <h2 class="titulo">Regla de consistencia</h2>
+      <div class="caja">
+        <span class="tag-concepto">Concepto</span>
+        <p>Ninguna empresa la calcula igual — el nombre es el mismo, la fórmula cambia.</p>
+        <div class="ejemplo"><span class="tag-ejemplo">Ejemplo Atmos — Instant Funding (20%)</span><br>Tu <strong>mejor día</strong> define el <strong>piso</strong> de tu objetivo de cobro. Si tu mejor día ganaste $200, tenés que llegar a $1,000.01 de ganancia total para poder cobrar — y te pagan el 80% de eso.</div>
+        <div class="nota">⚠️ En otras firms la "consistencia" se calcula distinto: algunas ponen un <strong>techo</strong> (tu mejor día no puede superar X% del total), no un piso. Siempre confirmá la fórmula exacta en la FAQ de la empresa que uses.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 14 — CALCULADORA -->
+  <div class="card" id="card-14">
+    <div class="card-inner">
+      <span class="fase-tag">Herramienta</span>
+      <h2 class="titulo">Calculadora de riesgo y consistencia</h2>
+      <div class="herramienta">
+        <div class="fila-doble">
+          <div class="campo">
+            <label>% de consistencia a aplicar</label>
+            <input type="number" id="calc-consistencia" value="20" step="1">
+          </div>
+          <div class="campo">
+            <label>Riesgo máximo diario ($)</label>
+            <input type="number" id="calc-riesgo-diario" value="300" step="1">
+          </div>
+        </div>
+        <div class="fila-doble">
+          <div class="campo">
+            <label>Dividir en cuántas porciones</label>
+            <input type="number" id="calc-porciones" value="6" step="1">
+          </div>
+          <div class="campo">
+            <label>Relación riesgo:beneficio (RR)</label>
+            <select id="calc-rr">
+              <option value="2">1:2</option>
+              <option value="3">1:3</option>
+              <option value="4" selected>1:4</option>
+              <option value="5">1:5</option>
+              <option value="6">1:6</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn" onclick="calcular()">Calcular</button>
+        <div class="resultado" id="calc-resultado" style="display:none">
+          <div class="resultado-fila"><span class="resultado-label">Riesgo por operación</span><span class="resultado-valor" id="r-riesgo-op"></span></div>
+          <div class="resultado-fila"><span class="resultado-label">Ganancia en día perfecto</span><span class="resultado-valor" id="r-ganancia"></span></div>
+          <div class="resultado-fila"><span class="resultado-label">Objetivo de cobro (consistencia)</span><span class="resultado-valor" id="r-objetivo"></span></div>
+        </div>
+        <div class="nota">El RR no tiene que ser el mismo todos los días — si un día hacés 1:4 y al siguiente solo 1:1 o 1:2, sigue sumando hacia tu meta acumulada.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 15 — VENTANA DE NOTICIAS -->
+  <div class="card" id="card-15">
+    <div class="card-inner">
+      <span class="fase-tag">Fase 3 · Reglas comunes</span>
+      <h2 class="titulo">Ventana de noticias fundamentales</h2>
+      <div class="caja">
+        <span class="tag-concepto">Concepto</span>
+        <p>Muchas firms restringen operar X minutos antes y después de una noticia de alto impacto (NFP, FOMC, CPI, etc.). Varía si aplica solo en evaluación, solo en fondeada, o en ambas.</p>
+      </div>
+      <div class="grid-empresas">
+        <a class="empresa-card" href="https://www.forexfactory.com" target="_blank"><div class="empresa-nombre">ForexFactory</div><div class="empresa-link">Calendario →</div></a>
+        <a class="empresa-card" href="https://www.investing.com/economic-calendar" target="_blank"><div class="empresa-nombre">Investing.com</div><div class="empresa-link">Calendario →</div></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 16 — GANANCIA REQUERIDA -->
+  <div class="card" id="card-16">
+    <div class="card-inner">
+      <span class="fase-tag">Fase 3 · Reglas comunes</span>
+      <h2 class="titulo">Ganancia requerida para aprobar</h2>
+      <div class="caja">
+        <span class="tag-concepto">Concepto</span>
+        <p>El % objetivo de ganancia que tenés que alcanzar en cada fase para pasar la evaluación. Varía por empresa y por tipo de programa — siempre confirmalo antes de empezar a operar la prueba.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 17 — MÍNIMO DE DÍAS -->
+  <div class="card" id="card-17">
+    <div class="card-inner">
+      <span class="fase-tag">Fase 3 · Reglas comunes</span>
+      <h2 class="titulo">Mínimo de días operados</h2>
+      <div class="caja">
+        <span class="tag-concepto">Concepto</span>
+        <p>Algunas firms exigen un número mínimo de días con operación, aunque ya hayas alcanzado el objetivo de ganancia antes. No podés "pasar" la prueba en un solo día aunque el número te dé.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 18 — OTRAS REGLAS -->
+  <div class="card" id="card-18">
+    <div class="card-inner">
+      <span class="fase-tag">Fase 3 · Reglas comunes</span>
+      <h2 class="titulo">Otras reglas a vigilar</h2>
+      <div class="caja">
+        <span class="tag-concepto">Concepto</span>
+        <ul class="lista">
+          <li><strong>EAs / bots:</strong> algunas firms los permiten, otras no — revisá la política exacta.</li>
+          <li><strong>Copy trading:</strong> replicar operaciones entre cuentas suele estar restringido.</li>
+          <li><strong>Hedging:</strong> abrir posiciones opuestas entre cuentas puede estar prohibido.</li>
+        </ul>
+        <div class="nota">Son categorías que aparecen seguido en las FAQ — no las desarrollamos a fondo acá, pero ahora sabés que existen y dónde buscarlas.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 19 — CIERRE -->
+  <div class="card" id="card-19">
+    <div class="card-inner">
+      <span class="eyebrow">✓ Listo</span>
+      <h2 class="titulo">Ahora leé cualquier FAQ<br><em>y vas a entenderla.</em></h2>
+      <p class="subtitulo">Ya conocés los conceptos. El número exacto cambia según la empresa — la lógica, no.</p>
+      <div class="footer-nota">© johnnyfxec · Material de capacitación interna</div>
+    </div>
+  </div>
+
+</div><!-- /deck -->
+
+<script>
+var TOTAL_CARDS = 20;
+var cur = 0, moving = false;
+
+function goTo(n) {
+  if (moving || n === cur || n < 0 || n >= TOTAL_CARDS) return;
+  moving = true; cur = n;
+  document.getElementById('deck').style.transform = 'translateY(calc(-'+n+' * 100dvh))';
+  updateRail(n);
+  setTimeout(function(){ moving=false; }, 850);
+}
+
+function updateRail(n) {
+  document.querySelectorAll('.rail-dot').forEach(function(d,i){
+    d.classList.remove('active','done');
+    if(i<n) d.classList.add('done');
+    if(i===n) d.classList.add('active');
+  });
+}
+
+// construir rail dinámicamente según TOTAL_CARDS
+var railEl = document.getElementById('rail');
+for (var i = 0; i < TOTAL_CARDS; i++) {
+  var dot = document.createElement('div');
+  dot.className = 'rail-dot' + (i === 0 ? ' active' : '');
+  dot.dataset.card = i;
+  dot.addEventListener('click', function(){ goTo(parseInt(this.dataset.card)); });
+  railEl.appendChild(dot);
+}
+
+window.addEventListener('wheel',function(e){
+  if(moving) return;
+  if(e.deltaY>30) goTo(Math.min(cur+1, TOTAL_CARDS-1));
+  else if(e.deltaY<-30) goTo(Math.max(cur-1,0));
+},{passive:true});
+
+var ty0=0;
+window.addEventListener('touchstart',function(e){
+  ty0=e.touches[0].clientY;
+},{passive:true});
+
+window.addEventListener('touchend',function(e){
+  var dy=ty0-e.changedTouches[0].clientY;
+  if(Math.abs(dy)>50) {
+    if(dy>0) goTo(Math.min(cur+1, TOTAL_CARDS-1));
+    else goTo(Math.max(cur-1,0));
+  }
+},{passive:true});
+
+window.addEventListener('keydown', function(e){
+  if(e.key === 'ArrowDown' || e.key === 'PageDown') goTo(Math.min(cur+1, TOTAL_CARDS-1));
+  if(e.key === 'ArrowUp' || e.key === 'PageUp') goTo(Math.max(cur-1,0));
+});
+
+// ───────── CALCULADORA (Card 14) ─────────
+function calcular(){
+  var pct = parseFloat(document.getElementById('calc-consistencia').value) || 0;
+  var riesgoDia = parseFloat(document.getElementById('calc-riesgo-diario').value) || 0;
+  var porciones = parseFloat(document.getElementById('calc-porciones').value) || 1;
+  var rr = parseFloat(document.getElementById('calc-rr').value) || 1;
+
+  var riesgoOp = riesgoDia / porciones;
+  var ganancia = riesgoOp * rr;
+  // regla tipo Atmos: mejor día define el piso => objetivo = ganancia / pct
+  var objetivo = pct > 0 ? ganancia / (pct/100) : 0;
+
+  document.getElementById('r-riesgo-op').textContent = '$' + riesgoOp.toFixed(2);
+  document.getElementById('r-ganancia').textContent = '$' + ganancia.toFixed(2);
+  document.getElementById('r-objetivo').textContent = '$' + objetivo.toFixed(2);
+  document.getElementById('calc-resultado').style.display = 'block';
+}
+
+// ───────── EJERCICIOS ALEATORIOS ─────────
+function randChoice(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+function randInt(min,max){ return Math.floor(Math.random()*(max-min+1))+min; }
+
+// Ejercicio 9 — Riesgo diario
+var ej9 = {};
+function nuevoEj9(){
+  var cuenta = randChoice([5000,10000,25000,50000,100000,200000]);
+  var pct = randChoice([2,3,4,5]);
+  ej9 = { cuenta: cuenta, pct: pct, respuesta: cuenta * (pct/100) };
+  document.getElementById('ej9-enunciado').innerHTML =
+    'Tu cuenta es de <span class="valor">$'+cuenta.toLocaleString()+'</span> y el riesgo diario máximo permitido es <span class="valor">'+pct+'%</span>. ¿Cuál es el valor máximo que podés perder en un día, en dólares?';
+  document.getElementById('ej9-input').value = '';
+  document.getElementById('ej9-feedback').className = 'feedback';
+  document.getElementById('ej9-feedback').textContent = '';
+}
+function verificarEj9(){
+  var val = parseFloat(document.getElementById('ej9-input').value);
+  var fb = document.getElementById('ej9-feedback');
+  if (Math.abs(val - ej9.respuesta) < 0.5) {
+    fb.className = 'feedback ok';
+    fb.textContent = '✓ Correcto — $' + ej9.respuesta.toLocaleString();
+  } else {
+    fb.className = 'feedback fail';
+    fb.textContent = '✗ La respuesta correcta era $' + ej9.respuesta.toLocaleString();
+  }
+}
+
+// Ejercicio 11 — Trailing risk (piso donde se congela)
+var ej11 = {};
+function nuevoEj11(){
+  var cuenta = randChoice([5000,10000,25000,50000,100000]);
+  var trailing = randChoice([4,6,8,10]);
+  ej11 = { cuenta: cuenta, trailing: trailing, respuesta: cuenta };
+  document.getElementById('ej11-enunciado').innerHTML =
+    'Cuenta de <span class="valor">$'+cuenta.toLocaleString()+'</span> con trailing risk del <span class="valor">'+trailing+'%</span>. Una vez que tu equity sube lo suficiente para que el trailing se congele, ¿en qué valor queda fijo el piso de pérdida máxima?';
+  document.getElementById('ej11-input').value = '';
+  document.getElementById('ej11-feedback').className = 'feedback';
+  document.getElementById('ej11-feedback').textContent = '';
+}
+function verificarEj11(){
+  var val = parseFloat(document.getElementById('ej11-input').value);
+  var fb = document.getElementById('ej11-feedback');
+  if (Math.abs(val - ej11.respuesta) < 0.5) {
+    fb.className = 'feedback ok';
+    fb.textContent = '✓ Correcto — se congela en el valor inicial: $' + ej11.respuesta.toLocaleString();
+  } else {
+    fb.className = 'feedback fail';
+    fb.textContent = '✗ Se congela en el valor inicial de la cuenta: $' + ej11.respuesta.toLocaleString();
+  }
+}
+
+// Ejercicio 12 — Riesgo por operación
+var ej12 = {};
+function nuevoEj12(){
+  var riesgoDia = randChoice([150,200,300,400,600]);
+  var porciones = randChoice([4,5,6,7,8]);
+  ej12 = { riesgoDia: riesgoDia, porciones: porciones, respuesta: riesgoDia/porciones };
+  document.getElementById('ej12-enunciado').innerHTML =
+    'Tu riesgo diario máximo es <span class="valor">$'+riesgoDia+'</span> y querés dividirlo en <span class="valor">'+porciones+'</span> operaciones posibles. ¿Cuál es el riesgo máximo por operación?';
+  document.getElementById('ej12-input').value = '';
+  document.getElementById('ej12-feedback').className = 'feedback';
+  document.getElementById('ej12-feedback').textContent = '';
+}
+function verificarEj12(){
+  var val = parseFloat(document.getElementById('ej12-input').value);
+  var fb = document.getElementById('ej12-feedback');
+  if (Math.abs(val - ej12.respuesta) < 0.5) {
+    fb.className = 'feedback ok';
+    fb.textContent = '✓ Correcto — $' + ej12.respuesta.toFixed(2);
+  } else {
+    fb.className = 'feedback fail';
+    fb.textContent = '✗ La respuesta correcta era $' + ej12.respuesta.toFixed(2);
+  }
+}
+
+// Randomizar ejercicio cada vez que el deck llega a esa card
+var ultimoCur = 0;
+var _goTo = goTo;
+goTo = function(n){
+  var prev = cur;
+  _goTo(n);
+  if (cur === n && n !== prev) {
+    if (n === 9) nuevoEj9();
+    if (n === 11) nuevoEj11();
+    if (n === 12) nuevoEj12();
+  }
+};
+
+// inicializar ejercicios por si se entra directo (ej. recarga en esa card vía rail)
+nuevoEj9(); nuevoEj11(); nuevoEj12();
+</script>
+
+</body>
+</html>

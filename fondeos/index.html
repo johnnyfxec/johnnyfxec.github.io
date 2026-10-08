@@ -264,9 +264,12 @@ h2.titulo{
   text-align: center;
 }
 .empresa-card:hover, .empresa-card:active{ border-color: var(--c-gold); background: var(--c-gold-dim); }
-.empresa-logo{ width: 32px; height: 32px; object-fit: contain; margin-bottom: var(--s1); border-radius: var(--r-sm); }
+.empresa-logo{ width: 32px; height: 32px; object-fit: contain; margin-bottom: var(--s1); border-radius: var(--r-sm); background: #fff; padding: 4px; }
 .empresa-nombre{ font-weight: 700; font-size: var(--text-sm); margin-bottom: 2px; }
 .empresa-link{ font-size: var(--text-xs); color: var(--c-muted); }
+.empresa-links-dobles{ display: flex; gap: var(--s1); justify-content: center; margin-top: 2px; }
+.empresa-links-dobles a{ font-size: var(--text-xs); color: var(--c-muted); text-decoration: underline; text-decoration-color: rgba(122,118,114,0.4); }
+.empresa-links-dobles a:hover{ color: var(--c-gold-lt); }
 
 .lista-empresas{ display: flex; flex-direction: column; gap: var(--s2); margin-top: var(--s3); }
 .empresa-fila{
@@ -282,7 +285,7 @@ h2.titulo{
   transition: all 0.25s ease;
 }
 .empresa-fila:hover, .empresa-fila:active{ border-color: var(--c-gold); background: var(--c-gold-dim); }
-.empresa-fila-logo{ width: 36px; height: 36px; object-fit: contain; border-radius: var(--r-sm); flex-shrink: 0; }
+.empresa-fila-logo{ width: 36px; height: 36px; object-fit: contain; border-radius: var(--r-sm); flex-shrink: 0; background: #fff; padding: 4px; }
 .empresa-fila-nombre{ font-weight: 700; font-size: var(--text-sm); flex: 1; }
 .empresa-fila-cta{ color: var(--c-success); font-size: var(--text-sm); font-weight: 600; text-decoration: underline; text-decoration-color: rgba(63,185,80,0.4); white-space: nowrap; }
 
@@ -608,8 +611,7 @@ h2.titulo{
       <a class="empresa-card" href="https://help.atmosfunded.com/en/" target="_blank"><img class="empresa-logo" src="images/logo-atmos.png" alt="Atmos"><div class="empresa-nombre">Atmos</div><div class="empresa-link">Ver FAQ →</div></a>
       <a class="empresa-card" href="https://ftmo.com/es/faq/" target="_blank"><img class="empresa-logo" src="images/logo-ftmo.png" alt="FTMO"><div class="empresa-nombre">FTMO</div><div class="empresa-link">Ver FAQ →</div></a>
       <a class="empresa-card" href="https://the5ers.com/faqs/" target="_blank"><img class="empresa-logo" src="images/logo-5ers.png" alt="5ERS"><div class="empresa-nombre">5ERS</div><div class="empresa-link">Ver FAQ →</div></a>
-      <a class="empresa-card" href="https://fundingpips.com/trading-objectives" target="_blank"><img class="empresa-logo" src="images/logo-fundingpips.png" alt="FundingPips"><div class="empresa-nombre">FundingPips</div><div class="empresa-link">Objectives →</div></a>
-      <a class="empresa-card" href="https://help.fundingpips.com/hc/en-us" target="_blank"><div class="empresa-nombre">FundingPips</div><div class="empresa-link">FAQ →</div></a>
+      <div class="empresa-card"><img class="empresa-logo" src="images/logo-fundingpips.png" alt="FundingPips"><div class="empresa-nombre">FundingPips</div><div class="empresa-links-dobles"><a href="https://fundingpips.com/trading-objectives" target="_blank">Objectives →</a><a href="https://help.fundingpips.com/hc/en-us" target="_blank">FAQ →</a></div></div>
       <a class="empresa-card" href="https://help.alphacapitalgroup.uk/en/" target="_blank"><img class="empresa-logo" src="images/logo-alphacapital.png" alt="Alpha Capital"><div class="empresa-nombre">Alpha Capital</div><div class="empresa-link">Ver FAQ →</div></a>
       <a class="empresa-card" href="https://intercom.help/breakoutprop/en/" target="_blank"><img class="empresa-logo" src="images/logo-breakout.png" alt="Breakout"><div class="empresa-nombre">Breakout</div><div class="empresa-link">Ver FAQ →</div></a>
     </div>

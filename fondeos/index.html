@@ -238,6 +238,29 @@ h2.titulo{
 }
 .ejemplo strong{ color: var(--c-text); }
 
+.relacion-visual{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s3);
+  margin-top: var(--s4);
+  padding: var(--s3);
+  background: var(--c-gold-dim);
+  border: 1px solid var(--c-gold-ring);
+  border-radius: var(--r-md);
+  flex-wrap: wrap;
+}
+.relacion-item{
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--c-text);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.relacion-flecha{ color: var(--c-success); font-size: var(--text-xl); font-weight: 700; }
+.relacion-igual{ font-size: var(--text-xl); color: var(--c-gold); font-weight: 700; }
+
 .fuente{
   margin-top: var(--s2);
   font-size: var(--text-xs);
@@ -789,14 +812,28 @@ h2.titulo{
     <div class="caja">
       <span class="tag-concepto">Concepto</span>
       <p>El piso de pérdida máxima <strong>sigue al equity</strong> (incluye flotante, no solo lo cerrado) a medida que sube — hasta que cruza cierto umbral de ganancia, donde el piso se <strong>congela en el balance inicial</strong> y deja de moverse.</p>
-      <div class="ejemplo"><span class="tag-ejemplo">Ejemplo</span><br>Cuenta $100,000, riesgo máximo 10% → piso inicial $90,000. Si el equity sube a $105,000, el piso sube con esa ganancia a $95,000. Pero si cruza el umbral de ganancia (ej. +10%, $110,000), el piso deja de subir y se congela en <strong>$100,000</strong> — ya no en el 90% del nuevo equity.</div>
+      <div class="relacion-visual">
+        <div class="relacion-item"><span class="relacion-flecha">↑</span> Equity</div>
+        <div class="relacion-igual">=</div>
+        <div class="relacion-item"><span class="relacion-flecha">↑</span> Piso de riesgo máximo</div>
+      </div>
       <div class="nota">Es la forma que tienen las firms de evitar que se pongan codiciosos con una ganancia grande sin cerrarla. Si tienen un flotante importante, conviene asegurarlo.</div>
+    </div>
+  </div></div></div>
+
+  <!-- CARD 11a-2 — TRAILING RISK: EJEMPLO + GRÁFICO -->
+  <div class="card" id="card-18"><div class="card-pad"><div class="card-inner">
+    <span class="fase-tag">Fase 3 · Reglas comunes</span>
+    <h2 class="titulo">Trailing risk: en números</h2>
+    <div class="caja">
+      <span class="tag-concepto">Ejemplo</span>
+      <div class="ejemplo">Cuenta $100,000, riesgo máximo 10% → piso inicial $90,000. Si el equity sube a $105,000, el piso sube con esa ganancia a $95,000. Pero si cruza el umbral de ganancia (ej. +10%, $110,000), el piso deja de subir y se congela en <strong>$100,000</strong> — ya no en el 90% del nuevo equity.</div>
     </div>
     <div class="chart-box"><canvas id="chartTrailing"></canvas></div>
   </div></div></div>
 
   <!-- CARD 11b — TRAILING RISK: RESUMEN + EJERCICIO -->
-  <div class="card" id="card-18"><div class="card-pad"><div class="card-inner">
+  <div class="card" id="card-19"><div class="card-pad"><div class="card-inner">
     <span class="fase-tag">Fase 3 · Práctica</span>
     <h2 class="titulo">Trailing risk: a calcular</h2>
     <div class="caja">
@@ -811,7 +848,7 @@ h2.titulo{
   </div></div></div>
 
   <!-- CARD 12a — RIESGO POR OPERACIÓN: CONCEPTO -->
-  <div class="card" id="card-19"><div class="card-pad"><div class="card-inner">
+  <div class="card" id="card-20"><div class="card-pad"><div class="card-inner">
     <span class="fase-tag">Fase 3 · Reglas comunes</span>
     <h2 class="titulo">Riesgo por operación</h2>
     <div class="caja">
@@ -823,7 +860,7 @@ h2.titulo{
   </div></div></div>
 
   <!-- CARD 12b — RIESGO POR OPERACIÓN: FÓRMULA + EJERCICIO -->
-  <div class="card" id="card-20"><div class="card-pad"><div class="card-inner">
+  <div class="card" id="card-21"><div class="card-pad"><div class="card-inner">
     <span class="fase-tag">Fase 3 · Práctica</span>
     <h2 class="titulo">Riesgo por operación: a calcular</h2>
     <div class="caja">
@@ -838,7 +875,7 @@ h2.titulo{
   </div></div></div>
 
   <!-- CARD 13a — CONSISTENCIA: CONCEPTO -->
-  <div class="card" id="card-21"><div class="card-pad"><div class="card-inner">
+  <div class="card" id="card-22"><div class="card-pad"><div class="card-inner">
     <span class="fase-tag">Fase 3 · Reglas comunes</span>
     <h2 class="titulo">Regla de consistencia</h2>
     <div class="caja">
@@ -850,7 +887,7 @@ h2.titulo{
   </div></div></div>
 
   <!-- CARD 13b — CONSISTENCIA: VISUAL -->
-  <div class="card" id="card-22"><div class="card-pad"><div class="card-inner">
+  <div class="card" id="card-23"><div class="card-pad"><div class="card-inner">
     <span class="fase-tag">Fase 3 · Reglas comunes</span>
     <h2 class="titulo">A menor %, más lejos la meta</h2>
     <div class="caja">
@@ -862,7 +899,7 @@ h2.titulo{
   </div></div></div>
 
   <!-- CARD 14 — CALCULADORA (BUG CORREGIDO) -->
-  <div class="card" id="card-23"><div class="card-pad"><div class="card-inner">
+  <div class="card" id="card-24"><div class="card-pad"><div class="card-inner">
     <span class="fase-tag">Herramienta</span>
     <h2 class="titulo">Calculadora de riesgo y consistencia</h2>
     <div class="herramienta">
@@ -890,7 +927,7 @@ h2.titulo{
   </div></div></div>
 
   <!-- CARD 15 — NOTICIAS -->
-  <div class="card" id="card-24"><div class="card-pad"><div class="card-inner">
+  <div class="card" id="card-25"><div class="card-pad"><div class="card-inner">
     <span class="fase-tag">Fase 3 · Reglas comunes</span>
     <h2 class="titulo">Ventana de noticias fundamentales</h2>
     <div class="caja">
@@ -905,7 +942,7 @@ h2.titulo{
   </div></div></div>
 
   <!-- CARD 16 — GANANCIA REQUERIDA -->
-  <div class="card" id="card-25"><div class="card-pad"><div class="card-inner">
+  <div class="card" id="card-26"><div class="card-pad"><div class="card-inner">
     <span class="fase-tag">Fase 3 · Reglas comunes</span>
     <h2 class="titulo">Ganancia requerida para aprobar</h2>
     <div class="caja">
@@ -916,7 +953,7 @@ h2.titulo{
   </div></div></div>
 
   <!-- CARD 17 — MÍNIMO DE DÍAS -->
-  <div class="card" id="card-26"><div class="card-pad"><div class="card-inner">
+  <div class="card" id="card-27"><div class="card-pad"><div class="card-inner">
     <span class="fase-tag">Fase 3 · Reglas comunes</span>
     <h2 class="titulo">Mínimo de días operados</h2>
     <div class="caja">
@@ -927,7 +964,7 @@ h2.titulo{
   </div></div></div>
 
   <!-- CARD 18 — OTRAS REGLAS -->
-  <div class="card" id="card-27"><div class="card-pad"><div class="card-inner">
+  <div class="card" id="card-28"><div class="card-pad"><div class="card-inner">
     <span class="fase-tag">Fase 3 · Reglas comunes</span>
     <h2 class="titulo">Otras reglas a vigilar</h2>
     <div class="caja">
@@ -941,7 +978,7 @@ h2.titulo{
   </div></div></div>
 
   <!-- CARD 19 — CIERRE -->
-  <div class="card" id="card-28"><div class="card-pad"><div class="card-inner">
+  <div class="card" id="card-29"><div class="card-pad"><div class="card-inner">
     <span class="eyebrow">Listo</span>
     <h2 class="titulo">Ahora lean cualquier FAQ<br><em>y la van a entender.</em></h2>
     <p class="subtitulo">Ya conocen los conceptos. El número exacto cambia según la empresa — la lógica, no.</p>
@@ -952,7 +989,7 @@ h2.titulo{
 </div><!-- /deck -->
 
 <script>
-var TOTAL_CARDS = 29;
+var TOTAL_CARDS = 30;
 var cur = 0, moving = false;
 
 function goToRaw(n) {

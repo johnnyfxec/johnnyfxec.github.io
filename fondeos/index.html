@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="icon" type="image/png" href="images/favicon.png">
 <title>Fondeos — johnnyfxec</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <style>
@@ -368,6 +369,37 @@ h2.titulo{
 .btn:hover{ background: var(--c-gold-lt); }
 .btn-start{ margin-top: var(--s4); width: auto; padding: 14px var(--s5); }
 
+.btn-afiliado{
+  background: var(--c-gold);
+  color: #000;
+  border: none;
+  border-radius: var(--r-pill);
+  padding: 12px var(--s4);
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s1);
+  width: auto;
+  text-decoration: none;
+  margin-top: var(--s3);
+}
+.btn-afiliado:hover{ background: var(--c-gold-lt); }
+
+.link-afiliado{
+  display: inline-block;
+  margin-top: var(--s2);
+  color: var(--c-success);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgba(63,185,80,0.4);
+}
+.link-afiliado:hover{ text-decoration-color: var(--c-success); }
+
 /* ───────── EJERCICIO MULTIPLE CHOICE ───────── */
 .ejercicio-enunciado{
   font-size: var(--text-base);
@@ -562,6 +594,7 @@ h2.titulo{
       <a class="empresa-card" href="https://help.alphacapitalgroup.uk/en/" target="_blank"><div class="empresa-nombre">Alpha Capital</div><div class="empresa-link">Ver FAQ →</div></a>
       <a class="empresa-card" href="https://intercom.help/breakoutprop/en/" target="_blank"><div class="empresa-nombre">Breakout</div><div class="empresa-link">Ver FAQ →</div></a>
     </div>
+      <a class="btn-afiliado" href="https://app.atmosfunded.com/challenges?affiliateId=johnnyfx.ec" target="_blank">Abrir cuenta en Atmos →</a>
   </div></div></div>
 
   <!-- CARD 4a — MAPA DE TIPOS -->
@@ -583,6 +616,7 @@ h2.titulo{
     <h2 class="titulo">Cuánto cuesta cada tipo</h2>
     <div class="chart-box"><canvas id="chartFees"></canvas></div>
     <div class="fuente">Precios de lista Atmos para cuenta de $100K, sin cupones promocionales — <a href="https://atmosfunded.com/" target="_blank">atmosfunded.com</a></div>
+      <a class="link-afiliado" href="https://app.atmosfunded.com/challenges?affiliateId=johnnyfx.ec" target="_blank">Empezar con el precio actual →</a>
   </div></div></div>
 
   <!-- CARD 5 — 2 FASES -->
@@ -598,6 +632,7 @@ h2.titulo{
         <li>Algunas firms ofrecen escalabilidad: aumentan el capital con el tiempo.</li>
       </ul>
     </div>
+      <a class="link-afiliado" href="https://app.atmosfunded.com/challenges?affiliateId=johnnyfx.ec" target="_blank">Empezar esta opción →</a>
   </div></div></div>
 
   <!-- CARD 6 — 1 FASE -->
@@ -612,6 +647,7 @@ h2.titulo{
         <li>Riesgo máximo permitido suele ser menor que en 2 fases.</li>
       </ul>
     </div>
+      <a class="link-afiliado" href="https://app.atmosfunded.com/challenges?affiliateId=johnnyfx.ec" target="_blank">Empezar esta opción →</a>
   </div></div></div>
 
   <!-- CARD 7a — INSTANTÁNEA: QUÉ ES -->
@@ -634,6 +670,7 @@ h2.titulo{
     <h2 class="titulo">Instantánea: al momento de cobrar</h2>
     <div class="nota">Al cobrar, la cuenta vuelve al capital inicial — pero el margen de pérdida que ya se había usado para llegar a esa ganancia no se "devuelve". Resultado práctico: después de cobrar, la primera operación nueva puede dejar la cuenta sin margen.</div>
     <div class="nota" style="margin-top:var(--s2)">Por eso conviene mandar a cobrar todo de una vez después de una ganancia considerable (entre 5% y 10% del capital inicial) y tener presupuestada la siguiente cuenta — es, literalmente, el costo fijo de este negocio.</div>
+    <a class="link-afiliado" href="https://app.atmosfunded.com/challenges?affiliateId=johnnyfx.ec" target="_blank">Empezar esta opción →</a>
   </div></div></div>
 
   <!-- CARD NOVA-1 — QUÉ ES -->
@@ -677,6 +714,7 @@ h2.titulo{
         <tr><td>$100,000</td><td class="num">$569</td></tr>
       </table>
       <div class="fuente">Fuente: <a href="https://help.atmosfunded.com/en/articles/13959447-nova-challenge" target="_blank">FAQ oficial Atmos — Nova Challenge</a></div>
+      <a class="btn-afiliado" href="https://app.atmosfunded.com/challenges?affiliateId=johnnyfx.ec" target="_blank">Empezar con NOVA →</a>
     </div>
   </div></div></div>
 
@@ -885,6 +923,7 @@ h2.titulo{
     <span class="eyebrow">Listo</span>
     <h2 class="titulo">Ahora lean cualquier FAQ<br><em>y la van a entender.</em></h2>
     <p class="subtitulo">Ya conocen los conceptos. El número exacto cambia según la empresa — la lógica, no.</p>
+      <a class="btn-afiliado" href="https://app.atmosfunded.com/challenges?affiliateId=johnnyfx.ec" target="_blank" style="width:auto;padding:16px 40px;font-size:var(--text-base);margin-top:var(--s5)">Abrir mi cuenta en Atmos →</a>
     <div class="footer-nota">© johnnyfxec · Material de capacitación interna</div>
   </div></div></div>
 

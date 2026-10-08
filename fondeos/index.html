@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Fondeos — johnnyfxec</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
 
@@ -448,6 +449,19 @@ h2.titulo{
 
 .footer-nota{ margin-top: var(--s4); font-size: var(--text-xs); color: var(--c-muted); }
 
+/* ───────── GRÁFICOS ───────── */
+.chart-box{
+  background: var(--c-card);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-lg);
+  padding: var(--s3);
+  margin-top: var(--s3);
+  position: relative;
+  height: 220px;
+}
+.chart-box canvas{ max-height: 100%; }
+@media (max-width: 640px){ .chart-box{ height: 180px; padding: var(--s2); } }
+
 /* ───────── RESPONSIVE: 3 breakpoints ─────────
    Celular  : hasta 640px
    Tablet   : 641px a 1024px (incluye Tab S11 Ultra en vertical y horizontal)
@@ -557,14 +571,8 @@ h2.titulo{
       <div class="tipo-row"><span class="icono">💨</span><div class="tipo-texto"><div class="tipo-nombre">Instantánea</div><div class="tipo-desc">Fondeada desde el día 1 · más cara</div></div></div>
       <div class="tipo-row"><span class="icono">🔁</span><div class="tipo-texto"><div class="tipo-nombre">NOVA</div><div class="tipo-desc">Pasa primero, paga después · entrada casi gratis</div></div></div>
     </div>
-    <table class="tabla-fees">
-      <tr><th>Tipo</th><th>Cuenta $100K</th></tr>
-      <tr><td>2 Fases (Plus)</td><td class="num">$149</td></tr>
-      <tr><td>1 Fase (Standard)</td><td class="num">$383</td></tr>
-      <tr><td>Instantánea</td><td class="num">$649</td></tr>
-      <tr><td>NOVA</td><td class="num">$5 + $569</td></tr>
-    </table>
-    <div class="fuente">Precios de lista Atmos, sin cupones promocionales — <a href="https://atmosfunded.com/" target="_blank">atmosfunded.com</a></div>
+    <div class="chart-box"><canvas id="chartFees"></canvas></div>
+    <div class="fuente">Precios de lista Atmos para cuenta de $100K, sin cupones promocionales — <a href="https://atmosfunded.com/" target="_blank">atmosfunded.com</a></div>
   </div></div></div>
 
   <!-- CARD 5 — 2 FASES -->
@@ -712,6 +720,7 @@ h2.titulo{
       <div class="ejemplo"><span class="tag-ejemplo">Ejemplo</span><br>Cuenta $100,000, riesgo máximo 10% → piso inicial $90,000. Si el equity sube a $105,000, el piso sube con esa ganancia a $95,000. Pero si cruza el umbral de ganancia (ej. +10%, $110,000), el piso deja de subir y se congela en <strong>$100,000</strong> — ya no en el 90% del nuevo equity.</div>
       <div class="nota">Es la forma que tienen las firms de evitar que se pongan codiciosos con una ganancia grande sin cerrarla. Si tienen un flotante importante, conviene asegurarlo.</div>
     </div>
+    <div class="chart-box"><canvas id="chartTrailing"></canvas></div>
   </div></div></div>
 
   <!-- CARD 11b — TRAILING RISK: RESUMEN + EJERCICIO -->
@@ -756,7 +765,7 @@ h2.titulo{
     </div>
   </div></div></div>
 
-  <!-- CARD 13 — CONSISTENCIA -->
+  <!-- CARD 13a — CONSISTENCIA: CONCEPTO -->
   <div class="card" id="card-18"><div class="card-pad"><div class="card-inner">
     <span class="fase-tag">Fase 3 · Reglas comunes</span>
     <h2 class="titulo">Regla de consistencia</h2>
@@ -764,12 +773,24 @@ h2.titulo{
       <span class="tag-concepto">Concepto</span>
       <p>Ninguna empresa la calcula igual — el nombre es el mismo, la fórmula cambia.</p>
       <div class="ejemplo"><span class="tag-ejemplo">Ejemplo Atmos — Instant Funding (20%)</span><br>El <strong>mejor día</strong> define el <strong>piso</strong> del objetivo: si el mejor día fue $100, hay que llegar a $500 de ganancia total para cobrar (100 ÷ 20% = 500).</div>
-      <div class="nota">⚠️ Fórmula rápida: <strong>100 ÷ % de consistencia</strong> = cuántas veces hay que acumular el mejor día. Ejemplo con 15%: 100÷15 = 6.67× el mejor día. En otras firms puede ser al revés — un <strong>techo</strong> (el mejor día no puede superar X% del total). Hay que confirmar siempre la fórmula exacta en la FAQ.</div>
+      <div class="nota">En otras firms puede ser al revés — un <strong>techo</strong> (el mejor día no puede superar X% del total). Hay que confirmar siempre la fórmula exacta en la FAQ.</div>
     </div>
   </div></div></div>
 
-  <!-- CARD 14 — CALCULADORA (BUG CORREGIDO) -->
+  <!-- CARD 13b — CONSISTENCIA: VISUAL -->
   <div class="card" id="card-19"><div class="card-pad"><div class="card-inner">
+    <span class="fase-tag">Fase 3 · Reglas comunes</span>
+    <h2 class="titulo">A menor %, más lejos la meta</h2>
+    <div class="caja">
+      <span class="tag-concepto">Fórmula rápida</span>
+      <p style="text-align:center; font-size:var(--text-lg); font-weight:700; color:var(--c-gold-lt)">100 ÷ % de consistencia = veces que hay que acumular el mejor día</p>
+    </div>
+    <div class="chart-box"><canvas id="chartConsistencia"></canvas></div>
+    <div class="fuente">Objetivo de cobro resultante con un mejor día fijo de $100, según distintos % de consistencia.</div>
+  </div></div></div>
+
+  <!-- CARD 14 — CALCULADORA (BUG CORREGIDO) -->
+  <div class="card" id="card-20"><div class="card-pad"><div class="card-inner">
     <span class="fase-tag">Herramienta</span>
     <h2 class="titulo">Calculadora de riesgo y consistencia</h2>
     <div class="herramienta">
@@ -797,7 +818,7 @@ h2.titulo{
   </div></div></div>
 
   <!-- CARD 15 — NOTICIAS -->
-  <div class="card" id="card-20"><div class="card-pad"><div class="card-inner">
+  <div class="card" id="card-21"><div class="card-pad"><div class="card-inner">
     <span class="fase-tag">Fase 3 · Reglas comunes</span>
     <h2 class="titulo">Ventana de noticias fundamentales</h2>
     <div class="caja">
@@ -812,7 +833,7 @@ h2.titulo{
   </div></div></div>
 
   <!-- CARD 16 — GANANCIA REQUERIDA -->
-  <div class="card" id="card-21"><div class="card-pad"><div class="card-inner">
+  <div class="card" id="card-22"><div class="card-pad"><div class="card-inner">
     <span class="fase-tag">Fase 3 · Reglas comunes</span>
     <h2 class="titulo">Ganancia requerida para aprobar</h2>
     <div class="caja">
@@ -823,7 +844,7 @@ h2.titulo{
   </div></div></div>
 
   <!-- CARD 17 — MÍNIMO DE DÍAS -->
-  <div class="card" id="card-22"><div class="card-pad"><div class="card-inner">
+  <div class="card" id="card-23"><div class="card-pad"><div class="card-inner">
     <span class="fase-tag">Fase 3 · Reglas comunes</span>
     <h2 class="titulo">Mínimo de días operados</h2>
     <div class="caja">
@@ -834,7 +855,7 @@ h2.titulo{
   </div></div></div>
 
   <!-- CARD 18 — OTRAS REGLAS -->
-  <div class="card" id="card-23"><div class="card-pad"><div class="card-inner">
+  <div class="card" id="card-24"><div class="card-pad"><div class="card-inner">
     <span class="fase-tag">Fase 3 · Reglas comunes</span>
     <h2 class="titulo">Otras reglas a vigilar</h2>
     <div class="caja">
@@ -848,7 +869,7 @@ h2.titulo{
   </div></div></div>
 
   <!-- CARD 19 — CIERRE -->
-  <div class="card" id="card-24"><div class="card-pad"><div class="card-inner">
+  <div class="card" id="card-25"><div class="card-pad"><div class="card-inner">
     <span class="eyebrow">✓ Listo</span>
     <h2 class="titulo">Ahora lean cualquier FAQ<br><em>y la van a entender.</em></h2>
     <p class="subtitulo">Ya conocen los conceptos. El número exacto cambia según la empresa — la lógica, no.</p>
@@ -858,7 +879,7 @@ h2.titulo{
 </div><!-- /deck -->
 
 <script>
-var TOTAL_CARDS = 25;
+var TOTAL_CARDS = 26;
 var cur = 0, moving = false;
 
 function goToRaw(n) {
@@ -1020,13 +1041,101 @@ function nuevoEj12(){
   var opciones = [
     { valor: Math.round(correcto*100)/100, correcta: true },
     { valor: riesgoDia * porciones, correcta: false, razon: 'Eso sería multiplicar, no dividir.' },
-    { valor: Math.round((riesgoDia/(porciones-2))*100)/100, correcta: false, razon: 'Revisá la cantidad de porciones del enunciado.' },
+    { valor: Math.round((riesgoDia/(porciones-2))*100)/100, correcta: false, razon: 'Hay que revisar la cantidad de porciones del enunciado.' },
     { valor: riesgoDia, correcta: false, razon: 'Ese es el riesgo diario total, no el de una sola operación.' }
   ];
   renderOpciones('ej12-opciones', 'ej12-reset', opciones);
 }
 
 nuevoEj9(); nuevoEj11(); nuevoEj12();
+
+/* ───────── GRÁFICOS (Chart.js) ───────── */
+var CHART_GOLD = '#C9A84C';
+var CHART_GOLD_LT = '#E8C97A';
+var CHART_MUTED = '#7A7672';
+var CHART_TEXT = '#F0EDE8';
+var CHART_GRID = 'rgba(240,237,232,0.08)';
+
+Chart.defaults.font.family = "'Inter', system-ui, sans-serif";
+Chart.defaults.color = CHART_MUTED;
+
+// Gráfico 1 — Trailing risk: piso vs equity
+new Chart(document.getElementById('chartTrailing'), {
+  type: 'line',
+  data: {
+    labels: ['$100k\n(inicio)', '$102k', '$105k', '$108k', '$110k\n(umbral)', '$112k', '$115k'],
+    datasets: [{
+      label: 'Piso de pérdida máxima',
+      data: [90000, 92000, 95000, 98000, 100000, 100000, 100000],
+      borderColor: CHART_GOLD,
+      backgroundColor: 'rgba(201,168,76,0.12)',
+      borderWidth: 2.5,
+      pointBackgroundColor: CHART_GOLD,
+      pointRadius: 4,
+      fill: true,
+      tension: 0
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { color: CHART_GRID }, ticks: { font: { size: 10 } } },
+      y: { grid: { color: CHART_GRID }, ticks: { callback: function(v){ return '$'+(v/1000)+'k'; } } }
+    }
+  }
+});
+
+// Gráfico 2 — Comparativa de fees por tipo de programa
+new Chart(document.getElementById('chartFees'), {
+  type: 'bar',
+  data: {
+    labels: ['2 Fases', '1 Fase', 'Instantánea', 'NOVA'],
+    datasets: [{
+      label: 'Fee cuenta $100K',
+      data: [149, 383, 649, 574],
+      backgroundColor: [CHART_GOLD_LT, CHART_GOLD, CHART_GOLD, 'rgba(201,168,76,0.55)'],
+      borderRadius: 6
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    indexAxis: 'y',
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { color: CHART_GRID }, ticks: { callback: function(v){ return '$'+v; } } },
+      y: { grid: { display: false } }
+    }
+  }
+});
+
+// Gráfico 3 — Objetivo de cobro según % de consistencia (mejor día fijo $100)
+new Chart(document.getElementById('chartConsistencia'), {
+  type: 'bar',
+  data: {
+    labels: ['15%', '20%', '25%', '35%', '50%'],
+    datasets: [{
+      label: 'Objetivo de cobro',
+      data: [100/0.15, 100/0.20, 100/0.25, 100/0.35, 100/0.50],
+      backgroundColor: CHART_GOLD,
+      borderRadius: 6
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: function(ctx){ return '$' + Math.round(ctx.parsed.y); } } }
+    },
+    scales: {
+      x: { grid: { display: false } },
+      y: { grid: { color: CHART_GRID }, ticks: { callback: function(v){ return '$'+v; } } }
+    }
+  }
+});
 </script>
 
 </body>

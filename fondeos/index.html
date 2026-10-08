@@ -264,8 +264,27 @@ h2.titulo{
   text-align: center;
 }
 .empresa-card:hover, .empresa-card:active{ border-color: var(--c-gold); background: var(--c-gold-dim); }
+.empresa-logo{ width: 32px; height: 32px; object-fit: contain; margin-bottom: var(--s1); border-radius: var(--r-sm); }
 .empresa-nombre{ font-weight: 700; font-size: var(--text-sm); margin-bottom: 2px; }
 .empresa-link{ font-size: var(--text-xs); color: var(--c-muted); }
+
+.lista-empresas{ display: flex; flex-direction: column; gap: var(--s2); margin-top: var(--s3); }
+.empresa-fila{
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  background: var(--c-card);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-md);
+  padding: var(--s2) var(--s3);
+  text-decoration: none;
+  color: var(--c-text);
+  transition: all 0.25s ease;
+}
+.empresa-fila:hover, .empresa-fila:active{ border-color: var(--c-gold); background: var(--c-gold-dim); }
+.empresa-fila-logo{ width: 36px; height: 36px; object-fit: contain; border-radius: var(--r-sm); flex-shrink: 0; }
+.empresa-fila-nombre{ font-weight: 700; font-size: var(--text-sm); flex: 1; }
+.empresa-fila-cta{ color: var(--c-success); font-size: var(--text-sm); font-weight: 600; text-decoration: underline; text-decoration-color: rgba(63,185,80,0.4); white-space: nowrap; }
 
 /* ───────── TABLA TIPOS ───────── */
 .tabla-tipos{ display: grid; gap: var(--s2); margin-top: var(--s3); text-align: left; }
@@ -561,13 +580,13 @@ h2.titulo{
     <span class="eyebrow">Fase 1 · Con quién trabajamos</span>
     <h2 class="titulo">Las empresas con las que confiamos</h2>
     <p class="subtitulo">Estas son las que usamos nosotros mismos, dentro de nuestra organización.</p>
-    <div class="grid-empresas">
-      <div class="empresa-card"><div class="empresa-nombre">FTMO</div></div>
-      <div class="empresa-card"><div class="empresa-nombre">5ERS</div></div>
-      <div class="empresa-card"><div class="empresa-nombre">Alpha Capital</div></div>
-      <div class="empresa-card"><div class="empresa-nombre">FundingPips</div></div>
-      <div class="empresa-card"><div class="empresa-nombre">Atmos</div></div>
-      <div class="empresa-card"><div class="empresa-nombre">Breakout</div></div>
+    <div class="lista-empresas">
+      <a class="empresa-fila" href="https://ftmo.com/es/" target="_blank"><img class="empresa-fila-logo" src="images/logo-ftmo.png" alt="FTMO"><div class="empresa-fila-nombre">FTMO</div><div class="empresa-fila-cta">Ver programas →</div></a>
+      <a class="empresa-fila" href="https://the5ers.com/pricing/" target="_blank"><img class="empresa-fila-logo" src="images/logo-5ers.png" alt="5ERS"><div class="empresa-fila-nombre">5ERS</div><div class="empresa-fila-cta">Ver programas →</div></a>
+      <a class="empresa-fila" href="https://alphacapitalgroup.uk/" target="_blank"><img class="empresa-fila-logo" src="images/logo-alphacapital.png" alt="Alpha Capital"><div class="empresa-fila-nombre">Alpha Capital</div><div class="empresa-fila-cta">Ver programas →</div></a>
+      <a class="empresa-fila" href="https://fundingpips.com/pricing" target="_blank"><img class="empresa-fila-logo" src="images/logo-fundingpips.png" alt="FundingPips"><div class="empresa-fila-nombre">FundingPips</div><div class="empresa-fila-cta">Ver programas →</div></a>
+      <a class="empresa-fila" href="https://app.atmosfunded.com/challenges?affiliateId=johnnyfx.ec" target="_blank"><img class="empresa-fila-logo" src="images/logo-atmos.png" alt="Atmos"><div class="empresa-fila-nombre">Atmos</div><div class="empresa-fila-cta">Ver programas →</div></a>
+      <a class="empresa-fila" href="https://breakoutprop.com/" target="_blank"><img class="empresa-fila-logo" src="images/logo-breakout.png" alt="Breakout"><div class="empresa-fila-nombre">Breakout</div><div class="empresa-fila-cta">Ver programas →</div></a>
     </div>
   </div></div></div>
 
@@ -586,7 +605,7 @@ h2.titulo{
     <span class="eyebrow">Fase 1 · Con quién trabajamos</span>
     <h2 class="titulo">Las FAQ oficiales</h2>
     <div class="grid-empresas">
-      <a class="empresa-card" href="https://help.atmosfunded.com/en/" target="_blank"><div class="empresa-nombre">Atmos</div><div class="empresa-link">Ver FAQ →</div></a>
+      <a class="empresa-card" href="https://help.atmosfunded.com/en/" target="_blank"><img class="empresa-logo" src="images/logo-atmos.png" alt="Atmos"><div class="empresa-nombre">Atmos</div><div class="empresa-link">Ver FAQ →</div></a>
       <a class="empresa-card" href="https://ftmo.com/es/faq/" target="_blank"><div class="empresa-nombre">FTMO</div><div class="empresa-link">Ver FAQ →</div></a>
       <a class="empresa-card" href="https://the5ers.com/faqs/" target="_blank"><div class="empresa-nombre">5ERS</div><div class="empresa-link">Ver FAQ →</div></a>
       <a class="empresa-card" href="https://fundingpips.com/trading-objectives" target="_blank"><div class="empresa-nombre">FundingPips</div><div class="empresa-link">Objectives →</div></a>

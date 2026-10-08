@@ -128,6 +128,75 @@ body {
 
 @media (max-width: 640px){ .rail{ right:6px; gap:3px; } }
 
+/* ───────── MENÚ DE SECCIONES ───────── */
+.menu-btn{
+  position: fixed;
+  left: 14px; top: 14px;
+  z-index: 300;
+  width: 42px; height: 42px;
+  border-radius: var(--r-md);
+  background: rgba(20,20,20,0.85);
+  border: 1px solid var(--c-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+}
+.menu-btn span{ width: 18px; height: 2px; background: var(--c-text); border-radius: 2px; }
+
+.menu-overlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 290;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.menu-overlay.open{ opacity: 1; pointer-events: auto; }
+
+.menu-panel{
+  position: fixed;
+  left: 0; top: 0; bottom: 0;
+  width: min(300px, 82vw);
+  background: var(--c-bg);
+  border-right: 1px solid var(--c-border);
+  z-index: 295;
+  transform: translateX(-100%);
+  transition: transform 0.3s cubic-bezier(0.76,0,0.24,1);
+  overflow-y: auto;
+  padding: var(--s6) var(--s3) var(--s4);
+}
+.menu-panel.open{ transform: translateX(0); }
+
+.menu-titulo{
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--c-muted);
+  margin-bottom: var(--s3);
+  padding-left: var(--s2);
+}
+.menu-item{
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  color: var(--c-text);
+  font-family: var(--font);
+  font-size: var(--text-sm);
+  padding: 10px var(--s2);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.menu-item:hover, .menu-item:active{ background: var(--c-gold-dim); color: var(--c-gold-lt); }
+.menu-item.activo{ color: var(--c-gold); font-weight: 700; }
+
 /* ───────── NAV ARROWS (desktop hint) ───────── */
 .nav-hint{
   position: fixed;
@@ -574,6 +643,32 @@ h2.titulo{
 </head>
 <body>
 
+<button class="menu-btn" id="menuBtn" aria-label="Abrir menú de secciones"><span></span><span></span><span></span></button>
+<div class="menu-overlay" id="menuOverlay"></div>
+<nav class="menu-panel" id="menuPanel">
+  <div class="menu-titulo">Secciones</div>
+    <button class="menu-item" data-card="0" onclick="irAMenu(0)">Portada</button>
+    <button class="menu-item" data-card="1" onclick="irAMenu(1)">¿Qué es una cuenta de fondeo?</button>
+    <button class="menu-item" data-card="2" onclick="irAMenu(2)">Las empresas con las que confiamos</button>
+    <button class="menu-item" data-card="3" onclick="irAMenu(3)">Cómo leer las reglas de cada una</button>
+    <button class="menu-item" data-card="5" onclick="irAMenu(5)">Tipos de programa</button>
+    <button class="menu-item" data-card="7" onclick="irAMenu(7)">2 Fases</button>
+    <button class="menu-item" data-card="8" onclick="irAMenu(8)">1 Fase</button>
+    <button class="menu-item" data-card="9" onclick="irAMenu(9)">Instantánea</button>
+    <button class="menu-item" data-card="11" onclick="irAMenu(11)">NOVA</button>
+    <button class="menu-item" data-card="14" onclick="irAMenu(14)">Riesgo diario</button>
+    <button class="menu-item" data-card="16" onclick="irAMenu(16)">Riesgo total (con y sin trailing)</button>
+    <button class="menu-item" data-card="17" onclick="irAMenu(17)">Trailing risk</button>
+    <button class="menu-item" data-card="20" onclick="irAMenu(20)">Riesgo por operación</button>
+    <button class="menu-item" data-card="22" onclick="irAMenu(22)">Regla de consistencia</button>
+    <button class="menu-item" data-card="24" onclick="irAMenu(24)">Calculadora de riesgo y consistencia</button>
+    <button class="menu-item" data-card="25" onclick="irAMenu(25)">Ventana de noticias fundamentales</button>
+    <button class="menu-item" data-card="26" onclick="irAMenu(26)">Ganancia requerida para aprobar</button>
+    <button class="menu-item" data-card="27" onclick="irAMenu(27)">Mínimo de días operados</button>
+    <button class="menu-item" data-card="28" onclick="irAMenu(28)">Otras reglas a vigilar</button>
+    <button class="menu-item" data-card="29" onclick="irAMenu(29)">Cierre</button>
+</nav>
+
 <nav class="rail" id="rail"></nav>
 <div class="nav-hint" id="navHint">desliza o usa ↑ ↓</div>
 
@@ -1006,7 +1101,32 @@ function updateRail(n) {
     if(i<n) d.classList.add('done');
     if(i===n) d.classList.add('active');
   });
+  updateMenu(n);
 }
+
+function updateMenu(n) {
+  document.querySelectorAll('.menu-item').forEach(function(item){
+    item.classList.toggle('activo', parseInt(item.dataset.card) === n);
+  });
+}
+
+function irAMenu(n) {
+  goTo(n);
+  cerrarMenu();
+}
+
+function abrirMenu() {
+  document.getElementById('menuPanel').classList.add('open');
+  document.getElementById('menuOverlay').classList.add('open');
+}
+
+function cerrarMenu() {
+  document.getElementById('menuPanel').classList.remove('open');
+  document.getElementById('menuOverlay').classList.remove('open');
+}
+
+document.getElementById('menuBtn').addEventListener('click', abrirMenu);
+document.getElementById('menuOverlay').addEventListener('click', cerrarMenu);
 
 var railEl = document.getElementById('rail');
 for (var i = 0; i < TOTAL_CARDS; i++) {

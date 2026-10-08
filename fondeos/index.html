@@ -6,6 +6,7 @@
 <link rel="icon" type="image/png" href="images/favicon.png">
 <title>Fondeos — johnnyfxec</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
 
@@ -1130,6 +1131,7 @@ var CHART_GRID = 'rgba(240,237,232,0.08)';
 
 Chart.defaults.font.family = "'Inter', system-ui, sans-serif";
 Chart.defaults.color = CHART_MUTED;
+Chart.register(ChartDataLabels);
 
 // Gráfico 1 — Trailing risk: piso vs equity
 new Chart(document.getElementById('chartTrailing'), {
@@ -1151,10 +1153,27 @@ new Chart(document.getElementById('chartTrailing'), {
   options: {
     responsive: true,
     maintainAspectRatio: false,
-    plugins: { legend: { display: false } },
+    plugins: {
+      legend: { display: false },
+      datalabels: {
+        align: 'top',
+        anchor: 'end',
+        color: CHART_GOLD_LT,
+        font: { size: 10, weight: '700' },
+        formatter: function(v){ return '$'+(v/1000)+'k'; }
+      }
+    },
     scales: {
-      x: { grid: { color: CHART_GRID }, ticks: { font: { size: 10 } } },
-      y: { grid: { color: CHART_GRID }, ticks: { callback: function(v){ return '$'+(v/1000)+'k'; } } }
+      x: {
+        grid: { color: CHART_GRID },
+        ticks: { font: { size: 10 } },
+        title: { display: true, text: 'Evolución de la cuenta', color: CHART_MUTED, font: { size: 11 } }
+      },
+      y: {
+        grid: { color: CHART_GRID },
+        ticks: { callback: function(v){ return '$'+(v/1000)+'k'; } },
+        title: { display: true, text: 'Balance (USD)', color: CHART_MUTED, font: { size: 11 } }
+      }
     }
   }
 });
@@ -1175,10 +1194,26 @@ new Chart(document.getElementById('chartFees'), {
     responsive: true,
     maintainAspectRatio: false,
     indexAxis: 'y',
-    plugins: { legend: { display: false } },
+    plugins: {
+      legend: { display: false },
+      datalabels: {
+        align: 'end',
+        anchor: 'end',
+        color: CHART_GOLD_LT,
+        font: { size: 11, weight: '700' },
+        formatter: function(v){ return '$'+v; }
+      }
+    },
     scales: {
-      x: { grid: { color: CHART_GRID }, ticks: { callback: function(v){ return '$'+v; } } },
-      y: { grid: { display: false } }
+      x: {
+        grid: { color: CHART_GRID },
+        ticks: { callback: function(v){ return '$'+v; } },
+        title: { display: true, text: 'Costo en USD', color: CHART_MUTED, font: { size: 11 } }
+      },
+      y: {
+        grid: { display: false },
+        title: { display: true, text: 'Tipo de programa', color: CHART_MUTED, font: { size: 11 } }
+      }
     }
   }
 });
@@ -1200,11 +1235,25 @@ new Chart(document.getElementById('chartConsistencia'), {
     maintainAspectRatio: false,
     plugins: {
       legend: { display: false },
-      tooltip: { callbacks: { label: function(ctx){ return '$' + Math.round(ctx.parsed.y); } } }
+      tooltip: { callbacks: { label: function(ctx){ return '$' + Math.round(ctx.parsed.y); } } },
+      datalabels: {
+        align: 'top',
+        anchor: 'end',
+        color: CHART_GOLD_LT,
+        font: { size: 11, weight: '700' },
+        formatter: function(v){ return '$' + Math.round(v); }
+      }
     },
     scales: {
-      x: { grid: { display: false } },
-      y: { grid: { color: CHART_GRID }, ticks: { callback: function(v){ return '$'+v; } } }
+      x: {
+        grid: { display: false },
+        title: { display: true, text: '% de consistencia exigido', color: CHART_MUTED, font: { size: 11 } }
+      },
+      y: {
+        grid: { color: CHART_GRID },
+        ticks: { callback: function(v){ return '$'+v; } },
+        title: { display: true, text: 'Objetivo de cobro (USD)', color: CHART_MUTED, font: { size: 11 } }
+      }
     }
   }
 });

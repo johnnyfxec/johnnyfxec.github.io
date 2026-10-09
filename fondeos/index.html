@@ -1252,11 +1252,12 @@ function nuevoEj9(){
   var correcto = cuenta * (pct/100);
   document.getElementById('ej9-enunciado').innerHTML =
     'La cuenta es de <span class="valor">$'+cuenta.toLocaleString()+'</span> y el riesgo diario máximo es <span class="valor">'+pct+'%</span>. ¿Cuál es el valor máximo que se puede perder en un día?';
+  var calculo = '$'+cuenta.toLocaleString()+' × '+pct+'% = $'+cuenta.toLocaleString()+' × '+(pct/100)+' = $'+correcto.toLocaleString()+'.';
   var opciones = [
     { valor: correcto, correcta: true },
-    { valor: cuenta * ((pct+2)/100), correcta: false, razon: 'Ese no es el porcentaje del enunciado — hay que revisar el % exacto.' },
-    { valor: correcto * 10, correcta: false, razon: 'Falta mover el punto decimal al convertir el porcentaje.' },
-    { valor: cuenta * (pct/1000), correcta: false, razon: 'Se dividió de más — hay que revisar la conversión de porcentaje a decimal.' }
+    { valor: cuenta * ((pct+2)/100), correcta: false, razon: 'Ese no es el porcentaje del enunciado. El cálculo correcto es: '+calculo },
+    { valor: correcto * 10, correcta: false, razon: 'Faltó mover el punto decimal al convertir el porcentaje. El cálculo correcto es: '+calculo },
+    { valor: cuenta * (pct/1000), correcta: false, razon: 'Se dividió de más — '+pct+'% equivale a '+pct+'/100, no a '+pct+'/1000. El cálculo correcto es: '+calculo }
   ];
   renderOpciones('ej9-opciones', 'ej9-reset', opciones);
 }
@@ -1267,11 +1268,12 @@ function nuevoEj11(){
   var trailing = randChoice([4,6,8,10]);
   document.getElementById('ej11-enunciado').innerHTML =
     'Cuenta de <span class="valor">$'+cuenta.toLocaleString()+'</span> con trailing risk. Se cruza el umbral de ganancia y el piso deja de subir. ¿En qué valor queda fijo?';
+  var pisoAntes = Math.round(cuenta * (1 - trailing/100));
   var opciones = [
     { valor: cuenta, correcta: true },
-    { valor: cuenta * (1 - trailing/100), correcta: false, razon: 'Ese es el piso ANTES de cruzar el umbral — el piso se congela en el balance inicial, no ahí.' },
-    { valor: cuenta * (1 + trailing/100), correcta: false, razon: 'El piso no sube por encima del capital inicial.' },
-    { valor: cuenta * 1.10, correcta: false, razon: 'Se congela en el balance inicial, no en el equity alcanzado.' }
+    { valor: pisoAntes, correcta: false, razon: 'Ese es el piso ANTES de cruzar el umbral ($'+cuenta.toLocaleString()+' × (1 − '+trailing+'%) = $'+pisoAntes.toLocaleString()+'). Una vez cruzado el umbral, el piso deja de moverse y se congela en el balance inicial: $'+cuenta.toLocaleString()+'.' },
+    { valor: cuenta * (1 + trailing/100), correcta: false, razon: 'El piso nunca sube por encima del capital inicial — se congela exactamente en $'+cuenta.toLocaleString()+', no más arriba.' },
+    { valor: Math.round(cuenta * 1.10), correcta: false, razon: 'Ese sería el equity alcanzado, no el piso. El piso se congela en el balance inicial: $'+cuenta.toLocaleString()+'.' }
   ];
   renderOpciones('ej11-opciones', 'ej11-reset', opciones);
 }
@@ -1283,11 +1285,13 @@ function nuevoEj12(){
   var correcto = riesgoDia/porciones;
   document.getElementById('ej12-enunciado').innerHTML =
     'El riesgo diario máximo es <span class="valor">$'+riesgoDia+'</span> y se divide en <span class="valor">'+porciones+'</span> operaciones. ¿Cuál es el riesgo por operación?';
+  var correctoRedondeado = Math.round(correcto*100)/100;
+  var calculo = '$'+riesgoDia+' ÷ '+porciones+' = $'+correctoRedondeado+'.';
   var opciones = [
-    { valor: Math.round(correcto*100)/100, correcta: true },
-    { valor: riesgoDia * porciones, correcta: false, razon: 'Eso sería multiplicar, no dividir.' },
-    { valor: Math.round((riesgoDia/(porciones-2))*100)/100, correcta: false, razon: 'Hay que revisar la cantidad de porciones del enunciado.' },
-    { valor: riesgoDia, correcta: false, razon: 'Ese es el riesgo diario total, no el de una sola operación.' }
+    { valor: correctoRedondeado, correcta: true },
+    { valor: riesgoDia * porciones, correcta: false, razon: 'Eso es multiplicar en vez de dividir. El cálculo correcto es: '+calculo },
+    { valor: Math.round((riesgoDia/(porciones-2))*100)/100, correcta: false, razon: 'Se usó una cantidad de operaciones distinta a la del enunciado ('+porciones+'). El cálculo correcto es: '+calculo },
+    { valor: riesgoDia, correcta: false, razon: 'Ese es el riesgo diario total, sin dividir entre las operaciones. El cálculo correcto es: '+calculo }
   ];
   renderOpciones('ej12-opciones', 'ej12-reset', opciones);
 }

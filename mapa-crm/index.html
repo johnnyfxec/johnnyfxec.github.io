@@ -195,6 +195,16 @@ section.block .desc{ color:var(--c-muted); font-size:.88rem; margin-bottom:22px;
 .card .info .label{ font-size:.82rem; font-weight:600; line-height:1.35; margin-bottom:3px; }
 .card .info .file{ font-family:var(--font-mono); font-size:.68rem; color:var(--c-muted2); word-break:break-all; }
 
+.card .thumb.missing{
+  display:flex; align-items:center; justify-content:center; text-align:center;
+  background:repeating-linear-gradient(45deg, rgba(255,255,255,.03) 0 10px, rgba(255,255,255,.06) 10px 20px);
+}
+.card .thumb.missing .missing-label{
+  font-family:var(--font-mono); font-size:.72rem; color:var(--c-muted); padding:0 14px;
+}
+.card.is-missing{ cursor:default; }
+.card.is-missing:hover{ transform:none; border-color:var(--c-border); }
+
 /* ── Lightbox ────────────────────────────────────────────── */
 .lightbox{
   position:fixed; inset:0; z-index:200;
@@ -429,30 +439,42 @@ function buildCatalog() {
 
     section.items.forEach(item => {
       const hasPc = !!item.pc, hasMovil = !!item.movil;
-      const file = currentView === 'movil' && hasMovil ? item.movil : (hasPc ? item.pc : item.movil);
-      if (!file) return;
+      if (!hasPc && !hasMovil) return;
+
+      // Solo se muestra la imagen real de la vista activa. Si este estado no
+      // tiene captura para la vista actual, NO se sustituye silenciosamente
+      // por la imagen de la otra vista (eso causaba imágenes de PC apareciendo
+      // bajo la pestaña Móvil y viceversa) — se muestra un placeholder honesto.
+      const file = currentView === 'movil' ? (hasMovil ? item.movil : null) : (hasPc ? item.pc : null);
 
       const tags = [...(item.tags || [])];
       if (hasPc && !hasMovil) tags.push('only-pc');
       if (hasMovil && !hasPc) tags.push('only-movil');
 
       const card = document.createElement('div');
-      card.className = 'card';
-      card.dataset.file = file;
+      card.className = file ? 'card' : 'card is-missing';
       card.dataset.label = item.label;
+
+      const thumbHtml = file
+        ? `<img loading="lazy" src="images/${file}" alt="${item.label}">`
+        : `<div class="missing-label">Sin captura en vista ${currentView === 'movil' ? 'Móvil' : 'PC'}</div>`;
+
       card.innerHTML = `
-        <div class="thumb">
+        <div class="thumb${file ? '' : ' missing'}">
           <div class="tags">${tags.map(renderTag).join('')}</div>
-          <img loading="lazy" src="images/${file}" alt="${item.label}">
+          ${thumbHtml}
         </div>
         <div class="info">
           <div class="label">${item.label}</div>
-          <div class="file">${file}</div>
+          <div class="file">${file || '— no disponible en esta vista —'}</div>
         </div>`;
-      card.addEventListener('click', () => openLightbox(file, item.label, section.title));
+      if (file) {
+        card.dataset.file = file;
+        card.addEventListener('click', () => openLightbox(file, item.label, section.title));
+      }
       grid.appendChild(card);
 
-      flatList.push({ label: item.label, file, sectionTitle: section.title, item, sectionId: section.id });
+      if (file) flatList.push({ label: item.label, file, sectionTitle: section.title, item, sectionId: section.id });
     });
 
     main.appendChild(sec);
